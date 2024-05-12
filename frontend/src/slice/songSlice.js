@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 export const songSlice = createSlice({
   name: "song",
   initialState: {
     song: [],
-   
+
     error: null,
     groupedSongs: {},
-  
   },
   reducers: {
     getSongFetch: (state) => {
@@ -31,16 +29,17 @@ export const songSlice = createSlice({
     getsongFailure: (state) => {
       state.isLoading = false;
     },
- 
+
+    getSongAlbum: (state) => {
+      state.isLoading = true;
+    },
+    getSongAlbumSuccess: (state, action) => {
+      state.song = action.payload;
+    }
   },
 });
 
-export const {
-  getSongFetch,
-  getsongSuccess,
-  getsongFailure,
-} = songSlice.actions;
-
-
+export const { getSongFetch, getsongSuccess, getsongFailure } =
+  songSlice.actions;
 
 export default songSlice.reducer;
