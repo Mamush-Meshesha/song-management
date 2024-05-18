@@ -21,10 +21,6 @@ const songSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Artwork: {
-    type: String,
-    required: true,
-  },
   Duration: {
     type: String,
     required: true,

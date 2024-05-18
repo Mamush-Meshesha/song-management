@@ -46,9 +46,8 @@ app.post("/songs", async (req, res) => {
     Artist: req.body.artist,
     Genres: req.body.genres,
     Album: req.body.album,
-    Artwork: req.body.artwork,
     Duration: req.body.duration,
-    file: req.body.urls,
+    file: req.body.file,
   });
   try {
     await song.save();
@@ -78,24 +77,23 @@ app.get("/genres", async (req, res) => {
   }
 })
 
-app.get("/album", async (req, res) => {
+app.get("/album/:name", async (req, res) => {
   try {
-    const { album } = req.body
+    const name = req.params.name;
+    const albumList = name.split(",");
+    const songs = await Song.find({ Album: { $in: albumList } });
 
-    const albumList = album.split(',')
-    const songs = await Song.find({ Album: { $in: albumList } })
-    
-
-    const totalSong = songs.length
+    const totalSong = songs.length;
     const response = {
       totalSong,
-      songs
-    }
-    res.status(200).json(response)
+      songs,
+    };
+    res.status(200).json(response);
   } catch (error) {
-    console.log("error fetching albums", error)
+    console.log("error fetching albums", error);
+    res.status(500).json({ error: "Error fetching albums" });
   }
-})
+});
 
 app.get("/artist", async (req, res) => {
   try {
@@ -127,7 +125,7 @@ app.get("/artist", async (req, res) => {
 })
 
 app.put("/update/:id", async (req, res) => {
-  const { Title, Artist, Album, Artwork, Genres, file, Duration } = req.body;
+  const { Title, Artist, Album, Genres, file, Duration } = req.body;
 
   try {
     const updateSong = await Song.findById(req.params.id);
@@ -137,7 +135,6 @@ app.put("/update/:id", async (req, res) => {
       updateSong.Artist = Artist;
       updateSong.Genres = Genres;
       updateSong.Album = Album;
-      updateSong.Artwork = Artwork;
       updateSong.file = file;
       updateSong.Duration = Duration;
 

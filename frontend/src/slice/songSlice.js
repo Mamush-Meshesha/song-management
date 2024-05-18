@@ -3,43 +3,50 @@ import { createSlice } from "@reduxjs/toolkit";
 export const songSlice = createSlice({
   name: "song",
   initialState: {
+    uploadedFile: null,
+    isLoading: false,
     song: [],
-
     error: null,
-    groupedSongs: {},
   },
   reducers: {
-    getSongFetch: (state) => {
+    uploadSong: (state,action) => {
       state.isLoading = true;
+      state.error = action.payload;
     },
-    getsongSuccess: (state, action) => {
-      state.song = action.payload;
-
-      // const grouped = action.payload.reduce((acc, song) => {
-      //   const genres = song.Genres;
-
-      //   if (!acc[genres]) {
-      //     acc[genres] = [];
-      //   }
-      //   acc[genres].push(song);
-      //   return acc;
-      // }, {});
-      // state.groupedSongs = grouped;
+    uploadSongSuccess: (state, action) => {
+      state.uploadedFile = action.payload;
+      state.isLoading = false;
     },
-    getsongFailure: (state) => {
+    uploadSongFailure: (state) => {
       state.isLoading = false;
     },
 
-    getSongAlbum: (state) => {
+    // upload song
+    uploadSongToCloud: (state) => {
+      state.isLoading = true
+    },
+    uploadSongToCloudSuccess: (state, action) => {
+      state.song = action.payload
+      state.isLoading = false
+    },
+    uploadSongToCloudFailure: (state, ) => {
+      state.isLoading = false
+    },
+    fetchSong: (state) => {
       state.isLoading = true;
     },
-    getSongAlbumSuccess: (state, action) => {
+    fetchSongSuccess: (state, action) => { 
       state.song = action.payload;
+      state.isLoading =false
+    },
+    fetchSongFailure: (state,action) => {
+      state.isLoading = false
+      state.error = action.payload
     }
   },
 });
 
-export const { getSongFetch, getsongSuccess, getsongFailure } =
+export const { uploadSong, uploadSongSuccess, uploadSongFailure, uploadSongToCloud, uploadSongToCloudSuccess,uploadSongToCloudFailure,fetchSong,fetchSongSuccess,fetchSongFailure } =
   songSlice.actions;
 
 export default songSlice.reducer;

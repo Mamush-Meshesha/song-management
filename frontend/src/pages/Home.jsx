@@ -4,14 +4,14 @@ import Songs from "../components/Songs";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { getSongFetch } from "../slice/songSlice"
+import { fetchSong } from "../slice/songSlice"
 
 function Home() {
   const songs = useSelector(state => state.song.song)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getSongFetch())
+    dispatch(fetchSong())
   }, [dispatch])
  const [showPlayer, setShowPlayer] = useState(false)
   const [selectedSongUrl, setSelectedSongUrl] = useState(null)
