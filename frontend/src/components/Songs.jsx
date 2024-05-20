@@ -81,7 +81,7 @@ const Songs = ({ songs, onSelected }) => {
                   <span className="grid grid-cols-5  w-full">
                     <div className="flex gap-2 items-center">
                       <img
-                        src={song.Artwork}
+                        src={song.Artwork ? song.Artwork : "/cov.webp"} 
                         className="w-10 rounded-md h-10"
                       />
                       <h1>{song.Title}</h1>

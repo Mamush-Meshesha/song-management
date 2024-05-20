@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import Addsong from "./Addsong";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import {Headers, Order, AddSongButton} from "../styled/Header";
 const Header = () => {
   const [showAdd, setShowAdd] = useState(false)
   
@@ -9,9 +10,9 @@ const Header = () => {
     setShowAdd(!showAdd)
   }
   return (
-    <div className="w-[18%]  bg-secondary rounded-md mx-3  z-40 fixed ">
+    <Headers>
       <div className="text-white">
-        <div className="flex flex-col h-[85%] gap-6 p-6">
+        <Order>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
             <NavLink to="/" className="sm:flex text-xl sm:gap-3 ">
               <svg
@@ -28,7 +29,7 @@ const Header = () => {
             </NavLink>
           </motion.button>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
-            <NavLink to="/all" className="sm:flex text-xl sm:gap-3">
+            <NavLink to="/artist" className="sm:flex text-xl sm:gap-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -42,7 +43,7 @@ const Header = () => {
                 />
               </svg>
 
-              <h1 className="hidden sm:block">Songs</h1>
+              <h1 className="hidden sm:block">Artists</h1>
             </NavLink>
           </motion.button>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
@@ -105,14 +106,14 @@ const Header = () => {
               />
             </svg>
 
-            <h1 onClick={toggleShow} className="hidden sm:block">
+            <AddSongButton onClick={toggleShow} className="hidden sm:block">
               Add Song
-            </h1>
+            </AddSongButton>
           </motion.button>
-        </div>
+        </Order>
       </div>
       <div>{showAdd && <Addsong />}</div>
-    </div>
+    </Headers>
   );
 };
 

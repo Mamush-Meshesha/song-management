@@ -14,6 +14,7 @@ const AlbumDetail = () => {
         <>
             <div>
                 <ul>
+                    hello
                     {/* {songs.map((song, index) => (
                         <li key={index}>
                             {song}

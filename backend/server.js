@@ -58,24 +58,23 @@ app.post("/songs", async (req, res) => {
 });
 
 app.get("/genres", async (req, res) => {
-  
   try {
-    const { genres } = req.body
-    
-    const genresList = genres.split(',')
-    const songs = await Song.find({ Genres: { $in: genresList } })
+    const { genres } = req.body;
 
-    const totalSong = songs.length
-    
+    const genresList = genres.split(",");
+    const songs = await Song.find({ Genres: { $in: genresList } });
+
+    const totalSong = songs.length;
+
     const response = {
       songs,
-      totalSong
-    }
-    res.json(response)
+      totalSong,
+    };
+    res.json(response);
   } catch (error) {
-    console.log("error fetching generes song", error) 
+    console.log("error fetching generes song", error);
   }
-})
+});
 
 app.get("/album/:name", async (req, res) => {
   try {
@@ -97,11 +96,11 @@ app.get("/album/:name", async (req, res) => {
 
 app.get("/artist", async (req, res) => {
   try {
-    const { artist } = req.body
-    
-    const artistList = artist.split(",")
-    const songs = await Song.find({ Artist: { $in: artistList } })
-    const totalSong = songs.length
+    const { artist } = req.body;
+
+    const artistList = artist.split(",");
+    const songs = await Song.find({ Artist: { $in: artistList } });
+    const totalSong = songs.length;
 
     const artistAlbumCounts = await Song.aggregate([
       {
@@ -116,13 +115,13 @@ app.get("/artist", async (req, res) => {
     const response = {
       songs,
       totalSong,
-      artistAlbumCounts
-    }
-    res.status(200).json(response)
+      artistAlbumCounts,
+    };
+    res.status(200).json(response);
   } catch (error) {
-    console.log("error retriving artists", error)
+    console.log("error retriving artists", error);
   }
-})
+});
 
 app.put("/update/:id", async (req, res) => {
   const { Title, Artist, Album, Genres, file, Duration } = req.body;
@@ -149,13 +148,17 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
-app.use("/delete/:id", async (req, res) => {
-  const song = await Song.findById(req.params.id);
-  if (song) {
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    const song = await Song.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ message: "Song not found" });
+    }
     await Song.deleteOne({ _id: song.id });
-    res.status(200).json({ message: "Song removed" });
-  } else {
-    res.status(404).json({ message: "Song not found" });
+    res.status(200).json({ message: "Song removed successfully" });
+  } catch (error) {
+    console.error("Error deleting song:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

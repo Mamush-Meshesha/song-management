@@ -98,7 +98,7 @@ const Addsong = () => {
           <input
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            type="number"
+            type="text"
             placeholder="duration"
             className="h-11 pl-3 outline-none rounded-md"
           />

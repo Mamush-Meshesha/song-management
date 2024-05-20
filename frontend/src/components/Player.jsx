@@ -3,6 +3,7 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { FaBackward, FaForward, FaForwardStep } from "react-icons/fa6";
 import { FaStepBackward } from "react-icons/fa";
+import { PlayerStyle } from "../styled/Player";
 
 const Player = ({ songUrl, song }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -108,7 +109,7 @@ const Player = ({ songUrl, song }) => {
   }, [songUrl]); // Update the audio source when the currentSongIndex changes
 
   return (
-    <div className=" flex justify-center items-center rounded-full px-20 gap-2 py-5 ml-[120px]  w-[80%] bottom-0 bg-gradient-to-b from-[#314447] border-0 border-transparent  via-[#517076] to-[#343A46] text-white right-0">
+    <PlayerStyle >
       <div>
         <audio ref={audioPlayer} src={songUrl} preload="metadata"></audio>
       </div>
@@ -150,13 +151,13 @@ const Player = ({ songUrl, song }) => {
           type="range"
           min="0"
           max="100"
-          step="1" // Adjust step as needed
+          step="1" 
           value={volume}
           onChange={handleVolumeChange}
         />
         <span>{volume}%</span>
       </div>
-    </div>
+    </PlayerStyle>
   );
 };
 

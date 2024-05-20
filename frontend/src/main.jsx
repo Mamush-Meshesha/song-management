@@ -8,9 +8,9 @@ import "./index.css";
 import Home from "./pages/Home.jsx";
 import Genres from "./pages/Genres.jsx";
 import Albums from "./pages/Album.jsx";
-import All from "./pages/All.jsx";
 import store from "./store/index.js";
 import AlbumDetail from "./pages/AlbumDetail.jsx";
+import Artists from "./pages/Artists.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/genres" element={<Genres />} />
         <Route path="/album" element={<Albums />} />
         <Route path="/album/:name" element={<AlbumDetail />} />
-        <Route path="/all" element={<All />} />
+        <Route path="/artist" element={<Artists />} />
       </Routes>
     </BrowserRouter>
   </Provider>

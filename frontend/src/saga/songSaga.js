@@ -7,6 +7,9 @@ import {
   uploadSongToCloudFailure,
   fetchSongSuccess,
   fetchSongFailure,
+  fetchSongByAlbumSuccess,
+  fetchSongByAlbumFailure,
+  fetchSongByAlbumRequest,
 } from "../slice/songSlice";
 
 function* uploadSong(action) {
@@ -39,6 +42,14 @@ function* fetchSong() {
     
   }
 }
+function* fetchSongsByAlbum(action) {
+  try {
+    const res = yield call(axios.get, `http://localhost:3200/album/${action.payload}`,)
+    yield put(fetchSongByAlbumSuccess(res.data))
+  } catch (error) {
+    yield put(fetchSongByAlbumFailure(error.message))
+  }
+}
 
 function* uploadSongTo(action) {
   try {
@@ -56,6 +67,7 @@ function* uploadSongTo(action) {
 
 function* watchUploadSong() {
   yield takeLatest("song/uploadSong", uploadSong);
+  yield takeLatest(fetchSongByAlbumRequest.type, fetchSongsByAlbum)
 }
 
 function* watchUploadTo() {
