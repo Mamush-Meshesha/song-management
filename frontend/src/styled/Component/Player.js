@@ -10,8 +10,8 @@ const PlayerStyle= styled.div`
   gap: 0.5rem; 
   padding-top: 1.25rem; 
   padding-bottom: 1.25rem; 
-  margin-top: 13.5rem; 
- 
+  margin: 13.5rem 15px; 
+ width: 79%;
   position: absolute;
   top: 0;
   background-image: linear-gradient(to bottom, #314447, #517076, #343a46);
@@ -19,7 +19,7 @@ const PlayerStyle= styled.div`
   border-color: transparent;
   color: #ffffff;
   right: 0;
-  left: 0;
+
 `;
 
 export {PlayerStyle}
