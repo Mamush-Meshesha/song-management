@@ -3,7 +3,7 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { FaBackward, FaForward, FaForwardStep } from "react-icons/fa6";
 import { FaStepBackward } from "react-icons/fa";
-import { PlayerStyle } from "../styled/Player";
+import { PlayerStyle } from "../styled/Component/Player";
 
 const Player = ({ songUrl, song }) => {
   const [isPlaying, setIsPlaying] = useState(false);

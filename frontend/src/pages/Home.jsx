@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchSong } from "../slice/songSlice"
+import { Container, Players } from "../styled/page/HomeStyled";
 
 function Home() {
   const songs = useSelector(state => state.song.song)
@@ -22,9 +23,9 @@ function Home() {
   }
   return (
     <div>
-      <div className="w-[79%] relative ml-[20%] min-h-[97%] m-7 mb-0 rounded-xl bg-secondary">
-        <div className="w-full">
-          <div className="bg-gradient-to-b rounded-t-lg from-[#0e7182] via-[#537075] to-[#2f4245] h-[120px] sm:h-[250px]">
+      <Container>
+        <div >
+          <Players>
             <dotlottie-player
               src="https://lottie.host/ca99de6d-26dd-411e-8def-8c940864c7f3/UaxD9Neqpo.json"
               background="transparent"
@@ -35,12 +36,12 @@ function Home() {
             <div>
               {showPlayer && <Player songUrl={selectedSongUrl} song={songs} />}
             </div>
-          </div>
+          </Players>
         </div>
         <div className="pt-20 px-10">
           <Songs songs={songs} onSelected={handleSongSelect} />
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

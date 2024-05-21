@@ -1,14 +1,15 @@
 import { CiPlay1 } from "react-icons/ci";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { Inner, PlayAndDelete } from "../styled/Component/PlayAndDelete";
 const PlayandDelete = () => {
   return (
     <div>
-      <div className="h-20 w-[100%] border-b flex items-center absolute bg-secondary bg-opacity-70 px-6">
-        <div className="flex justify-between w-full ">
+      <PlayAndDelete>
+        <Inner>
           <CiPlay1 className="text-xl" />
           <HiOutlineDotsHorizontal className="text-xl" />
-        </div>
-      </div>
+        </Inner>
+      </PlayAndDelete>
     </div>
   );
 };

@@ -18,4 +18,9 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  
+  "rules": {
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
+  }
+
 }

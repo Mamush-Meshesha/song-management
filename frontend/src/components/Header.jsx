@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import Addsong from "./Addsong";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {Headers, Order, AddSongButton} from "../styled/Header";
+import {Headers, Order, AddSongButton} from "../styled/Component/Header";
 const Header = () => {
   const [showAdd, setShowAdd] = useState(false)
   

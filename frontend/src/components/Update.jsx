@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { UpdateStyle } from "../styled/Component/Update";
 
 const Update = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +16,7 @@ const Update = () => {
 
   return (
     <div>
-      <motion.div className="w-[200px] flex flex-col gap-5 mr-[20px] mt-[60px] rounded-lg top-0 right-0 p-5 h-auto bg-secondary absolute">
+      <UpdateStyle>
         <AnimatePresence>
           {texts.map((text, index) => (
             <motion.button
@@ -30,7 +31,7 @@ const Update = () => {
             </motion.button>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </UpdateStyle>
     </div>
   );
 };

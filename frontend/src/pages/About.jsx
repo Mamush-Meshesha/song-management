@@ -1,9 +1,9 @@
-
+import { AboutStyled } from "../styled/page/AboutStyle"
 function About() {
   return (
-    <div>
+    <AboutStyled>
       about
-    </div>
+    </AboutStyled>
   )
 }
 

@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadSong, uploadSongToCloud } from "../slice/songSlice";
+import { Add, Pad } from "../styled/Component/Add";
 
 const Addsong = () => {
   const [audios, setAudios] = useState(null);
@@ -51,8 +52,8 @@ const Addsong = () => {
   };
 
   return (
-    <div className="w-[600px] h-[500px] rounded-lg top-0 mt-[350px] ml-[200px] bg-[#20413a] absolute">
-      <div className="p-10">
+    <Add>
+      <Pad>
         <div className="flex justify-center py-10 text-white text-3xl">
           <h1>Would you like to add a song?</h1>
         </div>
@@ -147,8 +148,8 @@ const Addsong = () => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </Pad>
+    </Add>
   );
 };
 

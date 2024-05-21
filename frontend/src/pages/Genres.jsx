@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import { Container, Table, Tilt } from "../styled/page/GenreStyle";
 
 
 const Genres = () => {
@@ -16,12 +16,12 @@ const Genres = () => {
   }
 console.log(groupedSongs)
   return (
-    <div className="w-[79%] ml-[20%] bg-secondary mx-3 rounded-lg h-[97vh] my-4">
-      <div className="flex justify-center pt-20 pb-10">
+    <Container>
+      <Tilt>
         <h1 className="text-3xl">Genres</h1>
-      </div>
-      <div className="grid grid-cols-4 gap-3 mx-[10%]">
-        {Object.entries(groupedSongs).map(([genre, songs]) => (
+      </Tilt>
+      <Table>
+        {/* {Object.entries(groupedSongs).map(([genre, songs]) => (
           <motion.div
             key={genre}
             whileTap={{ scale: 0.9 }}
@@ -45,9 +45,9 @@ console.log(groupedSongs)
               ))}
             </ul>
           </motion.div>
-        ))}
-      </div>
-    </div>
+        ))} */}
+      </Table>
+    </Container>
   );
 };
 

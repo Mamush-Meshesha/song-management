@@ -9,5 +9,7 @@ const Add = styled.div`
   position: absolute;
   top: 0;
 `;
-
-export { Add}
+const Pad = styled.div`
+  padding: 40px
+`
+export { Add, Pad}
