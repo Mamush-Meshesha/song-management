@@ -10,7 +10,7 @@ const PlayerStyle= styled.div`
   gap: 0.5rem; 
   padding-top: 1.25rem; 
   padding-bottom: 1.25rem; 
-  margin: 13.5rem 15px; 
+  margin: 13.5rem 1.2rem; 
  width: 79%;
   position: absolute;
   top: 0;
