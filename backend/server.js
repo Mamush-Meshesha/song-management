@@ -76,10 +76,10 @@ app.get("/genres", async (req, res) => {
   }
 });
 
-app.get("/album/:name", async (req, res) => {
+app.get("/album", async (req, res) => {
   try {
-    const name = req.params.name;
-    const albumList = name.split(",");
+    const { album } = req.body;
+    const albumList = album.split(",");
     const songs = await Song.find({ Album: { $in: albumList } });
 
     const totalSong = songs.length;
@@ -102,20 +102,20 @@ app.get("/artist", async (req, res) => {
     const songs = await Song.find({ Artist: { $in: artistList } });
     const totalSong = songs.length;
 
-    const artistAlbumCounts = await Song.aggregate([
-      {
-        $group: {
-          _id: "$Artist",
-          albumCount: { $addToSet: "$Album" },
-          count: { $sum: 1 },
-        },
-      },
-    ]);
+    // const artistAlbumCounts = await Song.aggregate([
+    //   {
+    //     $group: {
+    //       _id: "$Artist",
+    //       albumCount: { $addToSet: "$Album" },
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
 
     const response = {
       songs,
       totalSong,
-      artistAlbumCounts,
+      // artistAlbumCounts,
     };
     res.status(200).json(response);
   } catch (error) {
@@ -170,6 +170,49 @@ app.get("/single/:_id", async (req, res) => {
 app.get("/songs", async (req, res) => {
   const songs = await Song.find({});
   res.status(200).json(songs);
+});
+
+app.get("/overview", async (req, res) => {
+  try {
+    const totalSong = await Song.countDocuments();
+    const totalArtist = await Song.distinct("Artist").then(
+      (artists) => artists.length
+    );
+    const totalAlbum = await Song.distinct("Album").then(
+      (albums) => albums.length
+    );
+    const totalGenres = await Song.distinct("Genres").then(
+      (genres) => genres.length
+    );
+
+    const songsByGenres = await Song.aggregate([
+      { $group: { _id: "$Genres", count: { $sum: 1 } } },
+    ]);
+    const songSByArtist = await Song.aggregate([
+      {
+        $group: {
+          _id: "$Artist",
+          count: { $sum: 1 },
+          albums: { $addToSet: "$Album" },
+        },
+      },
+    ]);
+    const songsByAlbum = await Song.aggregate([
+      { $group: { _id: "$Album", count: { $sum: 1 } } },
+    ]);
+
+    res.status(200).json({
+      totalSong,
+      totalAlbum,
+      totalArtist,
+      totalGenres,
+      songSByArtist,
+      songsByAlbum,
+      songsByGenres,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 mongoose

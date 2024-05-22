@@ -42,7 +42,6 @@ const Songs = ({ songs, onSelected }) => {
       })
     ).isRequired,
   };
-  console.log(songs)
 
   return (
     <div>
@@ -76,14 +75,14 @@ const Songs = ({ songs, onSelected }) => {
                           <HiOutlineDotsHorizontal className="text-xl" />
                         </button>
                       </Inner>
-                      {showUpdate && <Update />}
                     </Placed>
                   ) : null}
+                  {showUpdate && <Update song={song._id} />}
                   <span className="flex items-center">{index + 1}. </span>
                   <EachSong>
                     <div className="flex gap-2 items-center">
                       <img
-                        src={song.Artwork ? song.Artwork : "/cov.webp"} 
+                        src={song.Artwork ? song.Artwork : "/cov.webp"}
                         className="w-10 rounded-md h-10"
                       />
                       <h1>{song.Title}</h1>

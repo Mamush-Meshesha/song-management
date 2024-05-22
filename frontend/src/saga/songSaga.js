@@ -10,6 +10,9 @@ import {
   fetchSongByAlbumSuccess,
   fetchSongByAlbumFailure,
   fetchSongByAlbumRequest,
+  removeSongSuccess,
+  removeSongFailure,
+  removeSongRequest,
 } from "../slice/songSlice";
 
 function* uploadSong(action) {
@@ -65,6 +68,21 @@ function* uploadSongTo(action) {
   }
 }
 
+function* deleteSongSage(action) {
+  try {
+    const res = yield call(axios.delete, `http://localhost:3200/delete/${action.payload}`)
+    yield put(removeSongSuccess(action.payload))
+    console.log(res.data)
+  } catch (error) {
+    yield put(removeSongFailure(error.message))
+    console.log(error.message)
+  }
+}
+
+function* watchDeleteSong() {
+  yield takeLatest("song/removeSongRequest", deleteSongSage)
+}
+
 function* watchUploadSong() {
   yield takeLatest("song/uploadSong", uploadSong);
   yield takeLatest(fetchSongByAlbumRequest.type, fetchSongsByAlbum)
@@ -79,11 +97,14 @@ function* watchSongFetch() {
   yield takeLatest("song/fetchSong", fetchSong)
 }
 
+
+
 export default function* rootSaga() {
   yield all([
     watchUploadSong(),
     watchUploadTo(),
-    watchSongFetch()
+    watchSongFetch(),
+    watchDeleteSong()
     // other sagas here
   ]);
 }

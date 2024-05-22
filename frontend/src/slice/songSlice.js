@@ -55,6 +55,18 @@ export const songSlice = createSlice({
     fetchSongByAlbumFailure: (state, action) => {
       (state.isLoading = false), (state.error = action.payload);
     },
+    removeSongRequest: (state) => {
+      state.isLoading = true;
+      state.error = null
+    },
+    removeSongSuccess: (state, action) => {
+      state.isLoading = false;
+      state.song = state.song.filter((song) => song._id !== action.payload);
+    },
+    removeSongFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -70,7 +82,10 @@ export const {
   fetchSongFailure,
   fetchSongByAlbumRequest,
   fetchSongByAlbumSuccess,
-  fetchSongByAlbumFailure
+  fetchSongByAlbumFailure,
+  removeSongFailure,
+  removeSongRequest,
+  removeSongSuccess
 } = songSlice.actions;
 
 export default songSlice.reducer;

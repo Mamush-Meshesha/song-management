@@ -6,7 +6,7 @@ const Container = styled.div`
     background-color: #132040;
     margin-right: 0.75rem;
     border-radius: 0.5rem;
-    height: 97vh;
+    min-height: 97vh;
     margin-top: 1rem;
     margin-bottom: 1rem;
 `
@@ -20,6 +20,7 @@ const Players = styled.div`
   border-top-left-radius: 0.5rem; 
   border-top-right-radius: 0.5rem; 
   height: 250px;
+  
 }
 
 // @media (min-width: 640px) {
