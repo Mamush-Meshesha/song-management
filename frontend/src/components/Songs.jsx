@@ -42,7 +42,6 @@ const Songs = ({ songs, onSelected }) => {
       })
     ).isRequired,
   };
-
   return (
     <div>
       <Song>
@@ -75,9 +74,9 @@ const Songs = ({ songs, onSelected }) => {
                           <HiOutlineDotsHorizontal className="text-xl" />
                         </button>
                       </Inner>
+                      {showUpdate && <Update song={song} onSelected={onSelected(song.file)}/>}
                     </Placed>
                   ) : null}
-                  {showUpdate && <Update song={song._id} />}
                   <span className="flex items-center">{index + 1}. </span>
                   <EachSong>
                     <div className="flex gap-2 items-center">

@@ -76,9 +76,28 @@ app.get("/genres", async (req, res) => {
   }
 });
 
+// app.get("/album", async (req, res) => {
+//   try {
+//     const { album } = req.body;
+//     const albumList = album.split(",");
+//     const songs = await Song.find({ Album: { $in: albumList } });
+
+//     const totalSong = songs.length;
+//     const response = {
+//       totalSong,
+//       songs,
+//     };
+//     res.status(200).json(response);
+//   } catch (error) {
+//     console.log("error fetching albums", error);
+//     res.status(500).json({ error: "Error fetching albums" });
+//   }
+// });
+
+// app.js or routes file
 app.get("/album", async (req, res) => {
   try {
-    const { album } = req.body;
+    const album = req.query.album; // Get the album parameter from query
     const albumList = album.split(",");
     const songs = await Song.find({ Album: { $in: albumList } });
 

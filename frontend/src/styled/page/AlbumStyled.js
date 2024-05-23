@@ -23,7 +23,7 @@ const Placed = styled.div`
   margin: 0 10%;
 `;
 
-const Box = styled.div`
+const Box = styled.button`
   height: 200px;
   border-radius: 6px;
   background-color: black;

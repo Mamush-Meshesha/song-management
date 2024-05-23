@@ -12,11 +12,20 @@ import {
   fetchSongByAlbumRequest,
   removeSongSuccess,
   removeSongFailure,
-  removeSongRequest,
+  updateSongSuccess,
+  updateSongFailure,
+  uploadSongProgress,
 } from "../slice/songSlice";
 
+const createUploadProgressHandler = (dispatch) => (progressEvent) => {
+  const progress = Math.round(
+    (progressEvent.loaded * 100) / progressEvent.total
+  );
+  dispatch(uploadSongProgress(progress));
+};
 function* uploadSong(action) {
   try {
+    const uploadProgressHandler = createUploadProgressHandler(yield);
     console.log("Uploading file:", action.payload);
     const response = yield call(
       axios.post,
@@ -26,6 +35,7 @@ function* uploadSong(action) {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        onUploadProgress: uploadProgressHandler,        
       }
     );
     console.log("Upload response:", response.data);
@@ -47,8 +57,11 @@ function* fetchSong() {
 }
 function* fetchSongsByAlbum(action) {
   try {
-    const res = yield call(axios.get, `http://localhost:3200/album/${action.payload}`,)
+    const res = yield call(axios.get, "http://localhost:3200/album", {
+      params: { album: action.payload },
+    })
     yield put(fetchSongByAlbumSuccess(res.data))
+    console.log(res.data)
   } catch (error) {
     yield put(fetchSongByAlbumFailure(error.message))
   }
@@ -79,8 +92,22 @@ function* deleteSongSage(action) {
   }
 }
 
+function* updateSongSage(action) {
+  try {
+    const res = yield call(axios.put, `http://localhost:3200/update/${action.payload.id}`,action.payload)
+    yield put(updateSongSuccess(res.data))
+    console.log(res.data)
+  } catch (error) {
+    yield put(updateSongFailure(error.message))
+  }
+}
+
 function* watchDeleteSong() {
   yield takeLatest("song/removeSongRequest", deleteSongSage)
+}
+
+function* watchUpdateSong() {
+  yield takeLatest("song/updateSongRequest", updateSongSage)
 }
 
 function* watchUploadSong() {
@@ -104,7 +131,8 @@ export default function* rootSaga() {
     watchUploadSong(),
     watchUploadTo(),
     watchSongFetch(),
-    watchDeleteSong()
+    watchDeleteSong(),
+    watchUpdateSong()
     // other sagas here
   ]);
 }

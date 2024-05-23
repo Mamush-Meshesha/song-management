@@ -12,6 +12,7 @@ const Addsong = () => {
   const [album, setAlbum] = useState("");
   const dispatch = useDispatch();
 
+  const { uploadProgress, isLoading} = useSelector(state => state.song)
   const handleFileChange = (e) => {
     setAudios(e.target.files[0]);
   };
@@ -135,6 +136,7 @@ const Addsong = () => {
             <button
               className="h-12  bg-[#1eab7a] text-white rounded-md"
               onClick={handleSubmit}
+              disabled={isLoading}
             >
               Upload File
             </button>
@@ -149,6 +151,12 @@ const Addsong = () => {
           </div>
         </div>
       </Pad>
+      {isLoading && (
+        <div className="absolute top-0 right-0">
+          <progress value={uploadProgress} max="100" />
+          <span>{uploadProgress}</span>
+        </div>
+      )}
     </Add>
   );
 };

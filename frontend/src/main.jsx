@@ -9,7 +9,6 @@ import Home from "./pages/Home.jsx";
 import Genres from "./pages/Genres.jsx";
 import Albums from "./pages/Album.jsx";
 import store from "./store/index.js";
-import AlbumDetail from "./pages/AlbumDetail.jsx";
 import Artists from "./pages/Artists.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -20,7 +19,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Home />} />
         <Route path="/genres" element={<Genres />} />
         <Route path="/album" element={<Albums />} />
-        <Route path="/album/:name" element={<AlbumDetail />} />
         <Route path="/artist" element={<Artists />} />
       </Routes>
     </BrowserRouter>

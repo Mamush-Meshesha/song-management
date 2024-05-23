@@ -1,52 +1,43 @@
-import {  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { uploadSong, uploadSongToCloud } from "../slice/songSlice";
+
+import { useState } from "react";
 import { Add, Pad } from "../styled/Component/Add";
+import { useDispatch } from "react-redux";
+import { updateSongRequest } from "../slice/songSlice";
 
-const Editsong = () => {
-  const [audios, setAudios] = useState(null);
-  const [id, setId] = useState("")
-  const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("");
-  const [genres, setGenres] = useState("");
-  const [duration, setDuration] = useState("");
-  const [album, setAlbum] = useState("");
-  const dispatch = useDispatch();
+const Editsong = ({song,onSelected}) => {
 
-  const handleFileChange = (e) => {
-    setAudios(e.target.files[0]);
-  };
+  const [title, setTitle] = useState(song?.Title || "")
+  const [album, setAlbum] = useState(song?.Album || "")
+  const [genres, setGenres] = useState(song?.Genres || "")
+  const [artist, setArtist] = useState(song?.Artist || "")
+  const [duration, setDuration] = useState(song?.Duration || "")
+  const [file, setFile] = useState(song.file)
+  
+ console.table(song)
 
-  const handleSubmit = () => {
-    if (!audios) {
-      console.error("No file selected");
-      return;
+  const dispatch = useDispatch()
+console.log("onselected on edit", onSelected);
+  const handleUpdateSong = () => {
+    const updateSong = {
+      id: song._id,
+      Title: title,
+      Album: album,
+      Genres: genres,
+      Artist: artist,
+      Duration: duration,
+      file: file
     }
-
-    const formData = new FormData();
-    formData.append("file", audios);
-
-    console.log("Dispatching uploadSong with:", formData);
-    dispatch(uploadSong(formData));
-  };
-
-  const files = useSelector((state) => state.song?.uploadedFile );
-    const file = files[0]?.url
-    console.log(file);
- 
-  const handleSongUpload = (song) => {
-    setId(song._id || "" )
-    setTitle(song.title )
-    setAlbum(song.album )
-    setArtist(song.artist )
-    setGenres(song.genres )
-    setDuration(song.duration )
+console.log(file)
+    dispatch(updateSongRequest(updateSong))
+  }
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
   };
 
   return (
     <Add>
       <Pad>
-        <div className="flex justify-center py-10 text-white text-3xl">
+        <div className="flex justify-center  py-10 text-white text-3xl">
           <h1>Would you like to add a song?</h1>
         </div>
         <div className="grid grid-cols-2 gap-6">
@@ -115,26 +106,24 @@ const Editsong = () => {
               Select audio file (.mp3/ogg ...)
             </span>
             <input
+              onChange={handleFileChange}
               type="file"
               className="hidden"
               accept="audio/*"
-              onChange={handleFileChange}
             />
           </label>
         </div>
         <div className="flex gap-10 w-full">
           <div className=" ">
-            <button
+            <button 
               className="h-12  bg-[#1eab7a] text-white rounded-md"
-              onClick={handleSubmit}
             >
               Upload File
             </button>
           </div>
           <div className="w-full">
-            <button
+            <button onClick={handleUpdateSong}
               className="h-12  bg-[#1eab7a] text-white rounded-md"
-              onClick={handleSongUpload}
             >
               upload song
             </button>

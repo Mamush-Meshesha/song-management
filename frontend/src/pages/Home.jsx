@@ -40,7 +40,7 @@ function Home() {
           </Players>
         </div>
         <div className="pt-20 px-10">
-          <Songs songs={songs} onSelected={handleSongSelect} />
+          <Songs songs={songs} onSelected={handleSongSelect}   />
         </div>
       </Container>
     </div>
