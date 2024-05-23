@@ -59,7 +59,7 @@ app.post("/songs", async (req, res) => {
 
 app.get("/genres", async (req, res) => {
   try {
-    const { genres } = req.body;
+    const genres  = req.query.genres;
 
     const genresList = genres.split(",");
     const songs = await Song.find({ Genres: { $in: genresList } });
@@ -115,7 +115,7 @@ app.get("/album", async (req, res) => {
 
 app.get("/artist", async (req, res) => {
   try {
-    const { artist } = req.body;
+    const artist = req.query.artist;
 
     const artistList = artist.split(",");
     const songs = await Song.find({ Artist: { $in: artistList } });

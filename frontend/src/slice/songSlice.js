@@ -8,6 +8,8 @@ export const songSlice = createSlice({
     song: [],
     totalSong: [],
     album: [],
+    artist: [],
+    genres: [],
     filteredSong: [],
     selectedSongUrl: null,
     uploadProgress: 0,
@@ -18,16 +20,16 @@ export const songSlice = createSlice({
     uploadSong: (state, action) => {
       state.isLoading = true;
       state.error = action.payload;
-      state.uploadProgress = 0
+      state.uploadProgress = 0;
     },
     uploadSongSuccess: (state, action) => {
       state.uploadedFile = action.payload;
       state.isLoading = false;
-      state.uploadProgress= 100
+      state.uploadProgress = 100;
     },
 
     uploadSongProgress: (state, action) => {
-      state.uploadProgress = action.payload
+      state.uploadProgress = action.payload;
     },
     uploadSongFailure: (state) => {
       state.isLoading = false;
@@ -67,7 +69,7 @@ export const songSlice = createSlice({
     },
     removeSongRequest: (state) => {
       state.isLoading = true;
-      state.error = null
+      state.error = null;
     },
     removeSongSuccess: (state, action) => {
       state.isLoading = false;
@@ -78,25 +80,50 @@ export const songSlice = createSlice({
       state.error = action.payload;
     },
     updateSongRequest: (state) => {
-      state.isLoading = true
+      state.isLoading = true;
     },
     updateSongSuccess: (state, action) => {
-      state.isLoading = false
-      state.song = state.song.map(song => song._id === action.payload._id ? action.payload : song)
+      state.isLoading = false;
+      state.song = state.song.map((song) =>
+        song._id === action.payload._id ? action.payload : song
+      );
     },
     updateSongFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    fetchSongByArtistRequest: (state) => {
+      state.isLoading = true;
+    },
+    fetchSongByArtistSuccess: (state, action) => {
+      state.artist = action.payload;
+      state.isLoading = false;
+    },
+    fetchSongByArtistFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    fetchSongByGenresRequest: (state) => {
+      state.isLoading = true
+    },
+    fetchSongByGenresSuccess: (state, action) => {
+      state.genres = action.payload
       state.isLoading = false
+    },
+    fetchSongByGenresFailure: (state, action) => {
       state.error = action.payload
+      state.isLoading = false
     },
 
     //local state
 
     setShowPlayer: (state, action) => {
-      state.showPlayer = action.payload
+      state.showPlayer = action.payload;
     },
-    setSelectedSongUrl: (state, action) => { 
-      state.selectedSongUrl = action.payload
-    }
+    setSelectedSongUrl: (state, action) => {
+      state.selectedSongUrl = action.payload;
+    },
   },
 });
 
@@ -119,7 +146,13 @@ export const {
   removeSongFailure,
   removeSongRequest,
   removeSongSuccess,
-  uploadSongProgress
+  uploadSongProgress,
+  fetchSongByArtistFailure,
+  fetchSongByArtistRequest,
+  fetchSongByArtistSuccess,
+  fetchSongByGenresFailure,
+  fetchSongByGenresRequest,
+  fetchSongByGenresSuccess
 } = songSlice.actions;
 
 export default songSlice.reducer;

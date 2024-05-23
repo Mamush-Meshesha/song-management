@@ -1,53 +1,45 @@
-import { useSelector } from "react-redux";
-import { Container, Table, Tilt } from "../styled/page/GenreStyle";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchSong, fetchSongByGenresRequest } from "../slice/songSlice";
+import { AlbumStyled, Box, Pad, Placed } from "../styled/page/AlbumStyled";
+import { useNavigate } from "react-router-dom";
 const Genres = () => {
-  const groupedSongs = useSelector((state) => state.song.groupedSongs);
-  const isLoading = useSelector((state) => state.song.isLoading);
-  const error = useSelector((state) => state.song.error); // Assuming you have an error state
+  const songs = useSelector((state) => state.song.song);
+  const totalSong = useSelector((state) => state.song.genres.totalSong);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Or any loading indicator you prefer
-  }
+  const handleGenresName = (genres) => {
+    dispatch(fetchSongByGenresRequest(genres));
+    navigate(`/genres/${genres}`);
+  };
 
-  if (error) {
-    return <div>Error: {error.message}</div>; // Adjust based on how you handle errors
-  }
-console.log(groupedSongs)
+  useEffect(() => {
+    dispatch(fetchSong());
+  }, [dispatch]);
   return (
-    <Container>
-      <Tilt>
-        <h1 className="text-3xl">Genres</h1>
-      </Tilt>
-      <Table>
-        {/* {Object.entries(groupedSongs).map(([genre, songs]) => (
-          <motion.div
-            key={genre}
-            whileTap={{ scale: 0.9 }}
-            className="h-[200px] rounded-md bg-primary text-white shadow-md flex flex-col justify-between"
+    <AlbumStyled>
+      <Pad>
+        <h1 className="text-3xl text-white">Genres</h1>
+      </Pad>
+      <Placed>
+        {songs.map((song, index) => (
+          <Box
+            onClick={() => handleGenresName(song.Genres)}
+            key={index}
+            style={{ backgroundImage: `url("/music2.jpg")` }}
           >
-            <h1 className="text-2xl capitalize">{genre}</h1>
-            <ul>
-              {songs.map((song) => (
-                <li key={song._id}>
-                  <h2 className="text-lg">{song.Title}</h2>
-                  <p className="text-sm text-[#4f4848]">
-                    Artist: {song.Artist}
-                  </p>
-                  <p className="text-sm text-[#4f4848]">Album: {song.Album}</p>
-                  <img
-                    src={song.Artwork}
-                    alt={song.Title}
-                    className="w-full h-1/2 object-cover rounded-md mt-2"
-                  />
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))} */}
-      </Table>
-    </Container>
+            <div>
+              <h1 className="text-2xl capitalize" key={index}>
+                {song.Genres} ( <span>{totalSong}</span>)
+              </h1>
+              <p className="text-sm text-[#e1e6dad5] py-2">{song.Title}</p>
+              <p className="text-sm text-[#bdbeb3]">{song.Album}</p>
+            </div>
+          </Box>
+        ))}
+      </Placed>
+    </AlbumStyled>
   );
 };
 

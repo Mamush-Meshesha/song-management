@@ -1,30 +1,45 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSong } from "../slice/songSlice";
-import { Container, EachArtist, Table, Titl } from "../styled/page/ArtistStyle";
+import { useEffect } from "react";
+import { fetchSong, fetchSongByArtistRequest } from "../slice/songSlice";
+import { AlbumStyled, Box, Pad, Placed } from "../styled/page/AlbumStyled";
+import { useNavigate } from "react-router-dom";
 const Artists = () => {
-  const songs = useSelector(state => state.song.song)
-  const dispatch = useDispatch()
+  const songs = useSelector((state) => state.song.song);
+    const totalSong = useSelector((state) => state.song.artist.totalSong);  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleArtistName = (artist) => {
+    dispatch(fetchSongByArtistRequest(artist));
+    navigate(`/artist/${artist}`);
+  };
 
   useEffect(() => {
-    dispatch(fetchSong())
-  },[dispatch])
+    dispatch(fetchSong());
+  }, [dispatch]);
   return (
-    <Container>
-      <Titl>
-        <h1>All songs</h1>
-      </Titl>
-      <EachArtist
-      >
+    <AlbumStyled>
+      <Pad>
+        <h1 className="text-3xl text-white">Artists</h1>
+      </Pad>
+      <Placed>
         {songs.map((song, index) => (
-          <Table
+          <Box
+            onClick={() => handleArtistName(song.Artist)}
             key={index}
+            style={{ backgroundImage: `url("/music2.jpg")` }}
           >
-            {index + 1}.  <h1>{song.Artist}</h1>
-          </Table>
+            <div>
+              <h1 className="text-2xl capitalize" key={index}>
+                {song.Artist} ( <span>{totalSong}</span>)
+              </h1>
+              <p className="text-sm text-[#e1e6dad5] py-2">{song.Title}</p>
+              <p className="text-sm text-[#bdbeb3]">{song.Album}</p>
+            </div>
+          </Box>
         ))}
-      </EachArtist>
-  </Container>
+      </Placed>
+    </AlbumStyled>
   );
 };
 

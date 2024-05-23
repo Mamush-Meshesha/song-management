@@ -9,7 +9,10 @@ import Home from "./pages/Home.jsx";
 import Genres from "./pages/Genres.jsx";
 import Albums from "./pages/Album.jsx";
 import store from "./store/index.js";
+import AlbumDetail from "./pages/AlbumDetail.jsx";
 import Artists from "./pages/Artists.jsx";
+import ArtistDetail from "./pages/ArtistDetail.jsx";
+import GenresDetail from "./pages/GenresDetail.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -18,8 +21,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/genres" element={<Genres />} />
+        <Route path="/genres/:genresName" element={<GenresDetail />} />
         <Route path="/album" element={<Albums />} />
+        <Route path="/album/:albumName" element={<AlbumDetail />} />
         <Route path="/artist" element={<Artists />} />
+        <Route path="/artist/:artistName" element={<ArtistDetail />} />
       </Routes>
     </BrowserRouter>
   </Provider>

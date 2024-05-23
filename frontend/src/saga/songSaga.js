@@ -15,6 +15,12 @@ import {
   updateSongSuccess,
   updateSongFailure,
   uploadSongProgress,
+  fetchSongByArtistSuccess,
+  fetchSongByArtistFailure,
+  fetchSongByArtistRequest,
+  fetchSongByGenresSuccess,
+  fetchSongByGenresFailure,
+  fetchSongByGenresRequest,
 } from "../slice/songSlice";
 
 const createUploadProgressHandler = (dispatch) => (progressEvent) => {
@@ -67,6 +73,28 @@ function* fetchSongsByAlbum(action) {
   }
 }
 
+function* fetchSongByArtistSaga(action) {
+  try {
+    const res = yield call(axios.get, "http://localhost:3200/artist", {
+      params: {artist: action.payload}
+    })
+    yield put(fetchSongByArtistSuccess(res.data))
+  } catch (error) {
+    yield put(fetchSongByArtistFailure(error.message))
+  }
+}
+
+function* fetchSongByGenreSaga(action) {
+  try {
+    const res = yield call(axios.get, "http://localhost:3200/genres", {
+      params: {genres: action.payload}
+    })
+    yield put(fetchSongByGenresSuccess(res.data))
+  } catch (error) {
+    yield put(fetchSongByGenresFailure(error.message))
+  }
+}
+
 function* uploadSongTo(action) {
   try {
     const res = yield call(axios.post, "http://localhost:3200/songs", action.payload, {
@@ -106,8 +134,15 @@ function* watchDeleteSong() {
   yield takeLatest("song/removeSongRequest", deleteSongSage)
 }
 
+function* watchFetchSongByArtist() {
+  yield takeLatest(fetchSongByArtistRequest.type, fetchSongByArtistSaga)
+}
 function* watchUpdateSong() {
   yield takeLatest("song/updateSongRequest", updateSongSage)
+}
+
+function* watchFetchSongByGenres() {
+  yield takeLatest(fetchSongByGenresRequest.type, fetchSongByGenreSaga)
 }
 
 function* watchUploadSong() {
@@ -132,7 +167,9 @@ export default function* rootSaga() {
     watchUploadTo(),
     watchSongFetch(),
     watchDeleteSong(),
-    watchUpdateSong()
+    watchUpdateSong(),
+    watchFetchSongByArtist(),
+    watchFetchSongByGenres()
     // other sagas here
   ]);
 }

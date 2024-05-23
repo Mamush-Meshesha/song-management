@@ -2,26 +2,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { AlbumStyled } from "../styled/page/AlbumStyled";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchSongByAlbumRequest } from "../slice/songSlice";
+import { fetchSongByArtistRequest } from "../slice/songSlice";
 import { EachSong, Head, Song } from "../styled/Component/Song";
 
-const AlbumDetail = () => {
-  const { albumName } = useParams();
-    const album = useSelector((state) => state.song.album.songs);
-    const error = useSelector((state) => state.song.error)
-    const isLoading = useSelector(state => state.song.isLoading) 
+const GenresDetail = () => {
+  const { genresName } = useParams();
+  const genres = useSelector((state) => state.song.genres.songs);
+  const error = useSelector((state) => state.song.error);
+  const isLoading = useSelector((state) => state.song.isLoading);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSongByAlbumRequest(albumName));
-  }, [dispatch, albumName]);
-    
-     if (isLoading) {
-       return <div>Loading...</div>;
-     }
+    dispatch(fetchSongByArtistRequest(genresName));
+  }, [dispatch, genresName]);
 
-     if (error) {
-       return <div>Error: {error}</div>;
-     }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <div className="">
       <Song>
@@ -33,8 +33,8 @@ const AlbumDetail = () => {
           <h1>duration</h1>
         </Head>
         <AlbumStyled>
-          {album && album.length > 0 ? (
-            album.map((song, index) => (
+          {genres && genres.length > 0 ? (
+            genres.map((song, index) => (
               <div key={index} className="flex text-white px-2 py-5">
                 <span>{index + 1}.</span>
                 <EachSong className="">
@@ -57,7 +57,7 @@ const AlbumDetail = () => {
               </div>
             ))
           ) : (
-            <div>No songs found for this album.</div>
+            <div>No songs found for this artist.</div>
           )}
         </AlbumStyled>
       </Song>
@@ -65,4 +65,4 @@ const AlbumDetail = () => {
   );
 };
 
-export default AlbumDetail;
+export default GenresDetail;
