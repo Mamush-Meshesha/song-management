@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 
 const AlbumStyled = styled.div`
-  width: 79%;
-  margin-left: 20%;
+
   background-color: #132040;
   margin-right: 0.75rem;
   border-radius: 0.5rem;

@@ -14,6 +14,8 @@ export const songSlice = createSlice({
     selectedSongUrl: null,
     uploadProgress: 0,
     showPlayer: false,
+    isHovered: [],
+    showUpdate: [],
     error: null,
   },
   reducers: {
@@ -105,15 +107,15 @@ export const songSlice = createSlice({
       state.error = action.payload;
     },
     fetchSongByGenresRequest: (state) => {
-      state.isLoading = true
+      state.isLoading = true;
     },
     fetchSongByGenresSuccess: (state, action) => {
-      state.genres = action.payload
-      state.isLoading = false
+      state.genres = action.payload;
+      state.isLoading = false;
     },
     fetchSongByGenresFailure: (state, action) => {
-      state.error = action.payload
-      state.isLoading = false
+      state.error = action.payload;
+      state.isLoading = false;
     },
 
     //local state
@@ -123,6 +125,13 @@ export const songSlice = createSlice({
     },
     setSelectedSongUrl: (state, action) => {
       state.selectedSongUrl = action.payload;
+    },
+    setIsHovered: (state, action) => {
+      state.isHovered = action.payload;
+      state.isHovered = new Array(action.payload.songs.length).fill(false);
+    },
+    setShowUpdate: (state, action) => {
+      state.showUpdate = action.payload;
     },
   },
 });
@@ -152,7 +161,12 @@ export const {
   fetchSongByArtistSuccess,
   fetchSongByGenresFailure,
   fetchSongByGenresRequest,
-  fetchSongByGenresSuccess
+  fetchSongByGenresSuccess,
+
+  setIsHovered,
+  setSelectedSongUrl,
+  setShowPlayer,
+  setShowUpdate,
 } = songSlice.actions;
 
 export default songSlice.reducer;

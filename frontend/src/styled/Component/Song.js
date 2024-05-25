@@ -10,7 +10,8 @@ const Head = styled.div`
   color: white;
   text-transform: Capitalized;
   padding: 20px 0;
-  font-size: 20px
+  font-size: 20px;
+  padding: 0 50px;
 `;
 const Placed = styled.div`
   height: 5rem; 

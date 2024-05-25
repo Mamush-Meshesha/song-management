@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchSong } from "../slice/songSlice"
 import { Container, Players } from "../styled/page/HomeStyled";
-import Update from "../components/Update";
 
 function Home() {
   const songs = useSelector(state => state.song.song)

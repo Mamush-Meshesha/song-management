@@ -53,8 +53,8 @@ const Songs = ({ songs, onSelected }) => {
           <h1>duration</h1>
         </Head>
 
-        <hr className="text-10] text-[#39b298] bg-secondary" />
-        <div className="text-white relative">
+        <hr className=" text-[#39b298] bg-secondary relative" />
+        <div className="text-white ">
           {songs.map((song, index) => (
             <div key={index}>
               <div>
@@ -65,17 +65,16 @@ const Songs = ({ songs, onSelected }) => {
                 >
                   {/*hovered song */}
                   {isHovered[index] ? (
-                    <Placed>
-                      <Inner>
+                    <div className="w-[74.8%] absolute h-20 border-b flex items-center px-6 opacity-70 bg-[#4d4e4c]">
+                      <div className="flex w-full justify-between">
                         <button onClick={() => onSelected(song.file)}>
                           <CiPlay1 className="text-xl" />
                         </button>
                         <button onClick={showHandleUpdate}>
                           <HiOutlineDotsHorizontal className="text-xl" />
                         </button>
-                      </Inner>
-                      {showUpdate && <Update song={song} onSelected={onSelected(song.file)}/>}
-                    </Placed>
+                      </div>
+                    </div>
                   ) : null}
                   <span className="flex items-center">{index + 1}. </span>
                   <EachSong>
@@ -100,6 +99,11 @@ const Songs = ({ songs, onSelected }) => {
                     </div>
                   </EachSong>
                 </span>
+              </div>
+              <div>
+                {showUpdate && (
+                  <Update song={song} onSelected={onSelected(song.file)} />
+                )}
               </div>
             </div>
           ))}
