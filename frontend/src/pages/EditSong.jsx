@@ -1,22 +1,22 @@
 
 import { useState } from "react";
-import { Add, Pad } from "../styled/Component/Add";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateSongRequest } from "../slice/songSlice";
 
-const Editsong = ({song,onSelected}) => {
+const Editsong = () => {
 
+  const song = useSelector(state => state.song.selectedSongUrl)
   const [title, setTitle] = useState(song?.Title || "")
   const [album, setAlbum] = useState(song?.Album || "")
   const [genres, setGenres] = useState(song?.Genres || "")
   const [artist, setArtist] = useState(song?.Artist || "")
   const [duration, setDuration] = useState(song?.Duration || "")
-  const [file, setFile] = useState(song.file)
+  const [file, setFile] = useState(song?.file || "")
   
  console.table(song)
 
   const dispatch = useDispatch()
-console.log("onselected on edit", onSelected);
+console.log("onselected on edit", song);
   const handleUpdateSong = () => {
     const updateSong = {
       id: song._id,
@@ -36,8 +36,8 @@ console.log(file)
 
   return (
     <div className="overflow-hidden">
-      <div className="w-[100%] h-[100%] absolute z-50 bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
-        <div className="w-[600px] h-[600px] p-10 bg-[#21362e] ">
+      <div className="w-[79%] ml-[20%] bg-[#262e2b] flex justify-center items-center min-h-screen  ">
+        <div className="w-[600px] h-[600px] p-10 bg-[#000000] rounded-lg ">
           <div className="flex justify-center  py-10 text-black  text-3xl">
             <h1>Would you like to update a song?</h1>
           </div>

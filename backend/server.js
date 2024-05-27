@@ -59,7 +59,7 @@ app.post("/songs", async (req, res) => {
 
 app.get("/genres", async (req, res) => {
   try {
-    const genres  = req.query.genres;
+    const genres = req.query.genres;
 
     const genresList = genres.split(",");
     const songs = await Song.find({ Genres: { $in: genresList } });
@@ -76,10 +76,9 @@ app.get("/genres", async (req, res) => {
   }
 });
 
-
 app.get("/album", async (req, res) => {
   try {
-    const album = req.query.album; 
+    const album = req.query.album;
     const albumList = album.split(",");
     const songs = await Song.find({ Album: { $in: albumList } });
 
@@ -95,34 +94,79 @@ app.get("/album", async (req, res) => {
   }
 });
 
+
+
 app.get("/artist", async (req, res) => {
   try {
     const artist = req.query.artist;
-
     const artistList = artist.split(",");
+
+    // Retrieve songs by the given artists
     const songs = await Song.find({ Artist: { $in: artistList } });
     const totalSong = songs.length;
 
-    const artistAlbumCounts = await Song.aggregate([
+    // Aggregate to get album counts per artist
+    const artistAlbumCountsAggregation = await Song.aggregate([
+      {
+        $match: { Artist: { $in: artistList } },
+      },
       {
         $group: {
           _id: "$Artist",
-          albumCount: { $addToSet: "$Album" },
-          count: { $sum: 1 },
+          uniqueAlbums: { $addToSet: "$Album" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          Artist: "$_id",
+          albumCount: { $size: "$uniqueAlbums" },
         },
       },
     ]);
 
+    // Prepare the final response
     const response = {
       songs,
       totalSong,
-      artistAlbumCounts,
+      artistAlbumCounts: artistAlbumCountsAggregation,
     };
+
     res.status(200).json(response);
   } catch (error) {
-    console.log("error retriving artists", error);
+    console.log("error retrieving artists", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// app.get("/artist", async (req, res) => {
+//   try {
+//     const artist = req.query.artist;
+
+//     const artistList = artist.split(",");
+//     const songs = await Song.find({ Artist: { $in: artistList } });
+//     const totalSong = songs.length;
+
+//     const artistAlbumCounts = await Song.aggregate([
+//       {
+//         $group: {
+//           _id: "$Artist",
+//           albumCount: { $addToSet: "$Album" },
+//           count: { $sum: 1 },
+//         },
+//       },
+//     ]);
+
+//     const response = {
+//       songs,
+//       totalSong,
+//       artistAlbumCounts,
+//     };
+//     res.status(200).json(response);
+//   } catch (error) {
+//     console.log("error retriving artists", error);
+//   }
+// });
 
 app.put("/update/:id", async (req, res) => {
   const { Title, Artist, Album, Genres, file, Duration } = req.body;

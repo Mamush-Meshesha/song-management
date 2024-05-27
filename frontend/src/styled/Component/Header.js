@@ -5,7 +5,10 @@ const Headers = styled.div`
   background-color: green;
   position: fixed;
   z-index: 40;
+  position: fixed;
 border-radius: 6px;
+margin: 15px;
+top: 0;
 `;
 const Order = styled.div`
     display: flex;

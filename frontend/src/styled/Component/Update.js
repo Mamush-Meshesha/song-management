@@ -12,7 +12,7 @@ const UpdateStyle = styled.div`
     right: 0;
     padding: 20px;
     hieght: auto;
-    position: absolute;
+    z-index: 50;
     background-color: black;
 
 `

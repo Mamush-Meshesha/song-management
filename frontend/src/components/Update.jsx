@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { removeSongRequest } from "../slice/songSlice";
 import { UpdateStyle } from "../styled/Component/Update";
-import {useDispatch, } from "react-redux"
-import Editsong from "./EditSong";
-const Update = ({ song, onSelected }) => {
+import {useDispatch, useSelector, } from "react-redux"
+import { useNavigate } from "react-router-dom";
+const Update = ({ onSelected }) => {
   
   const [showEdit, setShowEdit] = useState(false)
   const dispatch = useDispatch()
@@ -11,20 +11,21 @@ const Update = ({ song, onSelected }) => {
     dispatch(removeSongRequest(id))
     console.log(id)
   }
-console.log("onselected on update",onSelected)
+  const song = useSelector(state => state.song.selectedSongUrl)
+  console.log("onselected on update", onSelected)
+  const navigate = useNavigate()
   const handleShowEdit = () => {
-    setShowEdit(!showEdit)
+   navigate("/edit")
   }
   return (
-    <div className="">
-      <UpdateStyle>
+    <div className="relative">
+      <div className="flex flex-col gap-4 absolute right-0 top-0">
 
           <button onClick={handleShowEdit}>Edit</button>
           <button onClick={() => handleDeleteSong(song._id)}>Delete</button>
           <button>Favourate</button>
 
-      </UpdateStyle>
-      {showEdit && (<Editsong song={song} onSelected={onSelected} />)}
+      </div>
     </div>
   );
 };

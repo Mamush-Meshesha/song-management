@@ -1,21 +1,27 @@
+import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CiPlay1 } from "react-icons/ci";
 import PropTypes from "prop-types";
 import Update from "./Update";
-import { EachSong, Head, Inner, Placed, Song } from "../styled/Component/Song";
+import { EachSong, Head, Song } from "../styled/Component/Song";
+import { useSelector } from "react-redux";
+
 
 const Songs = ({ songs, onSelected }) => {
   const [isHovered, setIsHovered] = useState(
     new Array(songs.length).fill(false)
   );
 
-  const [showUpdate, setShowUpdate] = useState(false)
-
-
+  const selected = useSelector(state => state.song.selectedSongUrl)
+  console.log(selected)
+  const navigate = useNavigate();
+const [showList, setShowList] = useState(false)
   const showHandleUpdate = () => {
-    setShowUpdate(!showUpdate)
-  }
+    // navigate("/edit");
+    setShowList(true)
+  };
 
   const handleMouseEnter = (index) => {
     const newIsHovered = new Array(songs.length).fill(false);
@@ -27,8 +33,6 @@ const Songs = ({ songs, onSelected }) => {
   const handleMouseLeave = (index) => {
     setIsHovered(isHovered.map((hover, i) => (i === index ? false : hover)));
   };
-
-
 
   Songs.propTypes = {
     songs: PropTypes.arrayOf(
@@ -53,7 +57,7 @@ const Songs = ({ songs, onSelected }) => {
           <h1>duration</h1>
         </Head>
 
-        <hr className=" text-[#39b298] bg-secondary relative" />
+        <hr className=" text-[#39b298] bg-secondary overflow-x-hidden relative" />
         <div className="text-white ">
           {songs.map((song, index) => (
             <div key={index}>
@@ -63,14 +67,24 @@ const Songs = ({ songs, onSelected }) => {
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={() => handleMouseLeave(index)}
                 >
+                  {showList && (
+                    <div>
+                      <button>Edit</button>
+                      <button>Delete</button>
+                    </div>
+                  )}
                   {/*hovered song */}
                   {isHovered[index] ? (
-                    <div className="w-[74.8%] absolute h-20 border-b flex items-center px-6 opacity-70 bg-[#4d4e4c]">
+                    <div className="w-[74.8%] absolute  h-20 border-b flex items-center px-6 opacity-90 bg-[#4d4e4c]">
                       <div className="flex w-full justify-between">
                         <button onClick={() => onSelected(song.file)}>
                           <CiPlay1 className="text-xl" />
                         </button>
-                        <button onClick={showHandleUpdate}>
+                        <button
+                          onClick={() => {
+                            showHandleUpdate(selected._id);
+                          }}
+                        >
                           <HiOutlineDotsHorizontal className="text-xl" />
                         </button>
                       </div>
@@ -99,11 +113,6 @@ const Songs = ({ songs, onSelected }) => {
                     </div>
                   </EachSong>
                 </span>
-              </div>
-              <div>
-                {showUpdate && (
-                  <Update song={song} onSelected={onSelected(song.file)} />
-                )}
               </div>
             </div>
           ))}

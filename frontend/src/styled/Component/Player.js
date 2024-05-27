@@ -10,8 +10,8 @@ const PlayerStyle= styled.div`
   gap: 0.5rem; 
   padding-top: 1.25rem; 
   padding-bottom: 1.25rem; 
-  margin: 13.5rem 1.2rem; 
- width: 79%;
+  margin: 13.5rem 0rem; 
+ width: 100%;
   position: absolute;
   top: 0;
   background-image: linear-gradient(to bottom, #314447, #517076, #343a46);

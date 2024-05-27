@@ -124,7 +124,9 @@ export const songSlice = createSlice({
       state.showPlayer = action.payload;
     },
     setSelectedSongUrl: (state, action) => {
+      console.log("on slice", action.payload)
       state.selectedSongUrl = action.payload;
+      
     },
     setIsHovered: (state, action) => {
       state.isHovered = action.payload;

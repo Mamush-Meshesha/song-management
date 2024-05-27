@@ -64,7 +64,7 @@ const Player = ({ songUrl, song }) => {
     if (songUrl) {
       audioPlayer.current.src = songUrl;
     }
-  }, [songUrl]); // Update the audio source when the songUrl changes
+  }, [songUrl]);
 
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
@@ -82,19 +82,24 @@ const Player = ({ songUrl, song }) => {
   };
 
   const forwardThirthy = () => {
-    // Add 30 seconds to the audio player's current time
     audioPlayer.current.currentTime += 30;
-    // Update the progress bar value based on the audio player's current time
     progressBar.current.value = audioPlayer.current.currentTime;
     changeRange();
   };
   const nextSong = () => {
-    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % song.length);
+    setCurrentSongIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % song.length;
+      return newIndex;
+    });
+    setIsPlaying(true);
   };
+
   const previousSong = () => {
-    setCurrentSongIndex(
-      (prevIndex) => (prevIndex - 1 + song.length) % song.length
-    );
+    setCurrentSongIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + song.length) % song.length;
+      return newIndex;
+    });
+    setIsPlaying(true);
   };
 
   const handleVolumeChange = (e) => {
@@ -105,11 +110,11 @@ const Player = ({ songUrl, song }) => {
   };
 
   useEffect(() => {
-    audioPlayer.current.src = songUrl
+    audioPlayer.current.src = songUrl;
   }, [songUrl]); // Update the audio source when the currentSongIndex changes
 
   return (
-    <PlayerStyle >
+    <PlayerStyle>
       <div>
         <audio ref={audioPlayer} src={songUrl} preload="metadata"></audio>
       </div>
@@ -151,7 +156,7 @@ const Player = ({ songUrl, song }) => {
           type="range"
           min="0"
           max="100"
-          step="1" 
+          step="1"
           value={volume}
           onChange={handleVolumeChange}
         />

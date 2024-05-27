@@ -4,7 +4,7 @@ import Songs from "../components/Songs";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { fetchSong } from "../slice/songSlice"
+import { fetchSong, setSelectedSongUrl } from "../slice/songSlice"
 import { Container, Players } from "../styled/page/HomeStyled";
 
 function Home() {
@@ -15,16 +15,17 @@ function Home() {
     dispatch(fetchSong())
   }, [dispatch])
  const [showPlayer, setShowPlayer] = useState(false)
-  const [selectedSongUrl, setSelectedSongUrl] = useState(null)
+  // const [selectedSongUrl, setSelectedSongUrl] = useState(null)
+  const selectedSongUrl = useSelector((state) => state.song.selectedSongUrl);
   const handleSongSelect = (file) => {
     console.log("Song selected:", file);
-    setSelectedSongUrl(file)
+    dispatch(setSelectedSongUrl(file));
     setShowPlayer(true)
   }
   return (
     <div>
       <Container>
-        <div >
+        <div className="fixed  z-30 top-0  right-0 w-[80%] ">
           <Players>
             <dotlottie-player
               src="https://lottie.host/ca99de6d-26dd-411e-8def-8c940864c7f3/UaxD9Neqpo.json"
@@ -38,8 +39,8 @@ function Home() {
             </div>
           </Players>
         </div>
-        <div className="pt-20 px-10">
-          <Songs songs={songs} onSelected={handleSongSelect}   />
+        <div className="pt-20 px-10 mt-[250px]">
+          <Songs songs={songs} onSelected={handleSongSelect} />
         </div>
       </Container>
     </div>

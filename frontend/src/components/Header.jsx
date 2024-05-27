@@ -112,7 +112,7 @@ const Header = () => {
           </motion.button>
         </Order>
       </div>
-      <div>{showAdd && <Addsong />}</div>
+      <div>{showAdd && <Addsong  close ={toggleShow} />}</div>
     </Headers>
   );
 };

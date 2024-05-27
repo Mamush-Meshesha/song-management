@@ -1,9 +1,9 @@
 import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadSong, uploadSongToCloud } from "../slice/songSlice";
-import { Add, Pad } from "../styled/Component/Add";
+import { HiOutlineX } from "react-icons/hi";
 
-const Addsong = () => {
+const Addsong = ({close}) => {
   const [audios, setAudios] = useState(null);
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
@@ -11,6 +11,7 @@ const Addsong = () => {
   const [duration, setDuration] = useState("");
   const [album, setAlbum] = useState("");
   const dispatch = useDispatch();
+
 
   const { uploadProgress, isLoading} = useSelector(state => state.song)
   const handleFileChange = (e) => {
@@ -22,6 +23,8 @@ const Addsong = () => {
       console.error("No file selected");
       return;
     }
+
+  
 
     const formData = new FormData();
     formData.append("file", audios);
@@ -52,13 +55,17 @@ const Addsong = () => {
     dispatch(uploadSongToCloud(songDetails));
   };
 
+
   return (
     <div className="overflow-hidden">
       <div className="w-[100vw] h-[100vh] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
-        <div className="w-[600px] h-[600px] p-10 bg-[#21362e] ">
+        <div className="w-[600px] h-[600px] p-10 bg-[#21362e] relative rounded-lg ">
           <div className="flex justify-center py-10    text-white text-3xl">
             <h1>Would you like to add a song?</h1>
           </div>
+          <button onClick={close}>
+            <HiOutlineX className="absolute top-0 right-0 m-5 text-2xl text-white" />
+          </button>
           <div className="grid grid-cols-2 gap-6">
             <div>
               <input
