@@ -2,13 +2,13 @@ import styled from "@emotion/styled"
 
 const Headers = styled.div`
   width: 18%;
-  background-color: green;
+  background-color: #3a3c42;
   position: fixed;
   z-index: 40;
   position: fixed;
-border-radius: 6px;
-margin: 15px;
-top: 0;
+  border-radius: 6px;
+  margin: 15px;
+  top: 0;
 `;
 const Order = styled.div`
     display: flex;

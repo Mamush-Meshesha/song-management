@@ -21,7 +21,7 @@ function Home() {
     console.log("Song selected:", file);
     dispatch(setSelectedSongUrl(file));
     setShowPlayer(true)
-  }
+  } 
   return (
     <div>
       <Container>
@@ -39,7 +39,7 @@ function Home() {
             </div>
           </Players>
         </div>
-        <div className="pt-20 px-10 mt-[250px]">
+        <div className="px-10 mt-[250px]">
           <Songs songs={songs} onSelected={handleSongSelect} />
         </div>
       </Container>

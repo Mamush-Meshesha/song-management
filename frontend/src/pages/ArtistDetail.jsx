@@ -70,7 +70,7 @@ const ArtistDetail = () => {
           </div>
         </Players>
       </div>
-      <Song className="mt-20">
+      <Song className="mt-[250px]">
         <Head>
           <h1># Title</h1>
           <h1>artist</h1>

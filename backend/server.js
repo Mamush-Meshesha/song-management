@@ -94,8 +94,6 @@ app.get("/album", async (req, res) => {
   }
 });
 
-
-
 app.get("/artist", async (req, res) => {
   try {
     const artist = req.query.artist;

@@ -14,7 +14,10 @@ const Header = () => {
       <div className="text-white">
         <Order>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
-            <NavLink to="/" className="sm:flex text-xl sm:gap-3 ">
+            <NavLink
+              to="/"
+              className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -29,7 +32,10 @@ const Header = () => {
             </NavLink>
           </motion.button>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
-            <NavLink to="/artist" className="sm:flex text-xl sm:gap-3">
+            <NavLink
+              to="/artist"
+              className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -47,7 +53,10 @@ const Header = () => {
             </NavLink>
           </motion.button>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
-            <NavLink to="/album" className="sm:flex text-xl sm:gap-3">
+            <NavLink
+              to="/album"
+              className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -71,7 +80,10 @@ const Header = () => {
             </NavLink>
           </motion.button>
           <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
-            <NavLink to="/genres" className="sm:flex text-xl sm:gap-3">
+            <NavLink
+              to="/genres"
+              className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -91,7 +103,7 @@ const Header = () => {
           </motion.button>
           <motion.button
             whileTap={{ margin: "2px", scale: 0.9 }}
-            className="sm:flex text-xl sm:gap-3"
+            className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +124,7 @@ const Header = () => {
           </motion.button>
         </Order>
       </div>
-      <div>{showAdd && <Addsong  close ={toggleShow} />}</div>
+      <div>{showAdd && <Addsong close={toggleShow} />}</div>
     </Headers>
   );
 };

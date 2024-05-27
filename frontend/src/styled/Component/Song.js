@@ -11,7 +11,7 @@ const Head = styled.div`
   text-transform: Capitalized;
   padding: 20px 0;
   font-size: 20px;
-  padding: 0 50px;
+  padding: 70px 50px 10px;
 `;
 const Placed = styled.div`
   height: 5rem; 

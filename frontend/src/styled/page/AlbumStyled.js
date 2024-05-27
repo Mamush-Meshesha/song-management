@@ -2,12 +2,10 @@ import styled from "@emotion/styled";
 
 const AlbumStyled = styled.div`
 
-  background-color: #132040;
+  background-color: #3a3c42
   margin-right: 0.75rem;
   border-radius: 0.5rem;
-  height: 97vh;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  height: 100vh;
 `;
 
 const Pad = styled.div`

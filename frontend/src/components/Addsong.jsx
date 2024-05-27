@@ -59,12 +59,12 @@ const Addsong = ({close}) => {
   return (
     <div className="overflow-hidden">
       <div className="w-[100vw] h-[100vh] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
-        <div className="w-[600px] h-[600px] p-10 bg-[#21362e] relative rounded-lg ">
+        <div className="w-[600px] h-[600px] p-10 bg-[#3a3c42] relative rounded-lg ">
           <div className="flex justify-center py-10    text-white text-3xl">
             <h1>Would you like to add a song?</h1>
           </div>
           <button onClick={close}>
-            <HiOutlineX className="absolute top-0 right-0 m-5 text-2xl text-white" />
+            <HiOutlineX className="absolute top-0 right-0 m-5 text-3xl text-white border p-1 rounded-sm" />
           </button>
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -142,7 +142,7 @@ const Addsong = ({close}) => {
           <div className="flex gap-10 w-full">
             <div className=" ">
               <button
-                className="h-12  bg-[#1eab7a] text-white rounded-md"
+                className="h-12 w-[120px]  bg-[#1eab7a] text-white rounded-md"
                 onClick={handleSubmit}
                 disabled={isLoading}
               >
@@ -151,10 +151,10 @@ const Addsong = ({close}) => {
             </div>
             <div className="w-full">
               <button
-                className="h-12  bg-[#1eab7a] text-white rounded-md"
+                className="h-12  w-[120px] bg-[#1eab7a] text-white rounded-md"
                 onClick={handleSongUpload}
               >
-                upload song
+                Upload song
               </button>
             </div>
           </div>
