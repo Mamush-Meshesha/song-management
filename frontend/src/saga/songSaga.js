@@ -1,4 +1,4 @@
-import { call,all, put, takeLatest } from "redux-saga/effects";
+import { call, all, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
   uploadSongSuccess,
@@ -41,7 +41,7 @@ function* uploadSong(action) {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        onUploadProgress: uploadProgressHandler,        
+        onUploadProgress: uploadProgressHandler,
       }
     );
     console.log("Upload response:", response.data);
@@ -54,112 +54,119 @@ function* uploadSong(action) {
 
 function* fetchSong() {
   try {
-    const song = yield call(axios.get, "http://localhost:3200/songs")
-    yield put(fetchSongSuccess(song.data))
+    const song = yield call(axios.get, "http://localhost:3200/songs");
+    yield put(fetchSongSuccess(song.data));
   } catch (error) {
-    yield put(fetchSongFailure(error.message))
-    
+    yield put(fetchSongFailure(error.message));
   }
 }
 function* fetchSongsByAlbum(action) {
   try {
     const res = yield call(axios.get, "http://localhost:3200/album", {
       params: { album: action.payload },
-    })
-    yield put(fetchSongByAlbumSuccess(res.data))
-    console.log(res.data)
+    });
+    yield put(fetchSongByAlbumSuccess(res.data));
+    console.log(res.data);
   } catch (error) {
-    yield put(fetchSongByAlbumFailure(error.message))
+    yield put(fetchSongByAlbumFailure(error.message));
   }
 }
 
 function* fetchSongByArtistSaga(action) {
   try {
     const res = yield call(axios.get, "http://localhost:3200/artist", {
-      params: {artist: action.payload}
-    })
-    yield put(fetchSongByArtistSuccess(res.data))
+      params: { artist: action.payload },
+    });
+    yield put(fetchSongByArtistSuccess(res.data));
   } catch (error) {
-    yield put(fetchSongByArtistFailure(error.message))
+    yield put(fetchSongByArtistFailure(error.message));
   }
 }
 
 function* fetchSongByGenreSaga(action) {
   try {
     const res = yield call(axios.get, "http://localhost:3200/genres", {
-      params: {genres: action.payload}
-    })
-    yield put(fetchSongByGenresSuccess(res.data))
+      params: { genres: action.payload },
+    });
+    yield put(fetchSongByGenresSuccess(res.data));
   } catch (error) {
-    yield put(fetchSongByGenresFailure(error.message))
+    yield put(fetchSongByGenresFailure(error.message));
   }
 }
 
 function* uploadSongTo(action) {
   try {
-    const res = yield call(axios.post, "http://localhost:3200/songs", action.payload, {
+    const res = yield call(
+      axios.post,
+      "http://localhost:3200/songs",
+      action.payload,
+      {
         headers: {
           "Content-Type": "application/json",
         },
-      })
-    yield put(uploadSongToCloudSuccess(res.data))
+      }
+    );
+    yield put(uploadSongToCloudSuccess(res.data));
   } catch (error) {
-    yield put(uploadSongToCloudFailure(error.message))
-    
+    yield put(uploadSongToCloudFailure(error.message));
   }
 }
 
 function* deleteSongSage(action) {
   try {
-    const res = yield call(axios.delete, `http://localhost:3200/delete/${action.payload}`)
-    yield put(removeSongSuccess(action.payload))
-    console.log(res.data)
+    const res = yield call(
+      axios.delete,
+      `http://localhost:3200/delete/${action.payload}`
+    );
+    yield put(removeSongSuccess(action.payload));
+    console.log(res.data);
   } catch (error) {
-    yield put(removeSongFailure(error.message))
-    console.log(error.message)
+    yield put(removeSongFailure(error.message));
+    console.log(error.message);
   }
 }
 
 function* updateSongSage(action) {
   try {
-    const res = yield call(axios.put, `http://localhost:3200/update/${action.payload.id}`,action.payload)
-    yield put(updateSongSuccess(res.data))
-    console.log(res.data)
+    const res = yield call(
+      axios.put,
+      `http://localhost:3200/update/${action.payload.id}`,
+      action.payload
+    );
+    yield put(updateSongSuccess(res.data));
+    console.log(res.data);
   } catch (error) {
-    yield put(updateSongFailure(error.message))
+    yield put(updateSongFailure(error.message));
   }
 }
 
 function* watchDeleteSong() {
-  yield takeLatest("song/removeSongRequest", deleteSongSage)
+  yield takeLatest("song/removeSongRequest", deleteSongSage);
 }
 
 function* watchFetchSongByArtist() {
-  yield takeLatest(fetchSongByArtistRequest.type, fetchSongByArtistSaga)
+  yield takeLatest(fetchSongByArtistRequest.type, fetchSongByArtistSaga);
 }
 function* watchUpdateSong() {
-  yield takeLatest("song/updateSongRequest", updateSongSage)
+  yield takeLatest("song/updateSongRequest", updateSongSage);
 }
 
 function* watchFetchSongByGenres() {
-  yield takeLatest(fetchSongByGenresRequest.type, fetchSongByGenreSaga)
+  yield takeLatest(fetchSongByGenresRequest.type, fetchSongByGenreSaga);
 }
 
 function* watchUploadSong() {
   yield takeLatest("song/uploadSong", uploadSong);
-  yield takeLatest(fetchSongByAlbumRequest.type, fetchSongsByAlbum)
+  yield takeLatest(fetchSongByAlbumRequest.type, fetchSongsByAlbum);
 }
 
 function* watchUploadTo() {
-    yield takeLatest("song/uploadSongToCloud",uploadSongTo)
-
+  yield takeLatest("song/uploadSongToCloud", uploadSongTo);
 }
 
 function* watchSongFetch() {
-  yield takeLatest("song/fetchSong", fetchSong)
+  yield takeLatest("song/fetchSong", fetchSong);
 }
-
-
 
 export default function* rootSaga() {
   yield all([
@@ -169,7 +176,7 @@ export default function* rootSaga() {
     watchDeleteSong(),
     watchUpdateSong(),
     watchFetchSongByArtist(),
-    watchFetchSongByGenres()
+    watchFetchSongByGenres(),
     // other sagas here
   ]);
 }

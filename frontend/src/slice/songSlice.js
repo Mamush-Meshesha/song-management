@@ -9,6 +9,7 @@ export const songSlice = createSlice({
     totalSong: [],
     album: [],
     artist: [],
+    
     genres: [],
     filteredSong: [],
     selectedSongUrl: null,
@@ -58,7 +59,7 @@ export const songSlice = createSlice({
     fetchSongFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    }, 
     fetchSongByAlbumRequest: (state) => {
       state.isLoading = true;
     },
@@ -124,9 +125,8 @@ export const songSlice = createSlice({
       state.showPlayer = action.payload;
     },
     setSelectedSongUrl: (state, action) => {
-      console.log("on slice", action.payload)
+      console.log("on slice", action.payload);
       state.selectedSongUrl = action.payload;
-      
     },
     setIsHovered: (state, action) => {
       state.isHovered = action.payload;

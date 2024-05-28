@@ -211,8 +211,19 @@ app.get("/single/:_id", async (req, res) => {
 });
 
 app.get("/songs", async (req, res) => {
-  const songs = await Song.find({});
-  res.status(200).json(songs);
+  try {
+    const { page = 1, pageSize = 5, search } = req.query;
+
+    const query = search ? { title: { $regex: new RegExp(search, "i") } } : {};
+
+    const songs = await Song.find(query)
+      .skip((page - 1) * pageSize)
+      .limit(Number(pageSize));
+
+    res.json(songs);
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 app.get("/overview", async (req, res) => {
