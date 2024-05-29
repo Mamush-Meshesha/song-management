@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-
+import { FiEdit } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CiPlay1 } from "react-icons/ci";
 import PropTypes from "prop-types";
 import Update from "./Update";
 import { EachSong, Head, Song } from "../styled/Component/Song";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeSongRequest, updateSongRequest } from "../slice/songSlice";
 
 const Songs = ({ songs, onSelected }) => {
   const [isHovered, setIsHovered] = useState(
@@ -16,10 +18,11 @@ const Songs = ({ songs, onSelected }) => {
   const selected = useSelector((state) => state.song.selectedSongUrl);
   console.log(selected);
   const navigate = useNavigate();
+  const dispatch  = useDispatch()
   const [showList, setShowList] = useState(false);
   const showHandleUpdate = () => {
     // navigate("/edit");
-    setShowList(true);
+    setShowList(!showList);
   };
 
   const handleMouseEnter = (index) => {
@@ -32,6 +35,13 @@ const Songs = ({ songs, onSelected }) => {
   const handleMouseLeave = (index) => {
     setIsHovered(isHovered.map((hover, i) => (i === index ? false : hover)));
   };
+
+  const handleEditSong = () => {
+    navigate("/edit");
+  };
+    const handleDeleteSong = (id) => {
+      dispatch(removeSongRequest(id));
+    };
 
   Songs.propTypes = {
     songs: PropTypes.arrayOf(
@@ -46,8 +56,8 @@ const Songs = ({ songs, onSelected }) => {
     ).isRequired,
   };
   return (
-    <div>
-      <Song>
+    <div className="">
+      <div>
         <Head>
           <h1># Title</h1>
           <h1>artist</h1>
@@ -66,48 +76,67 @@ const Songs = ({ songs, onSelected }) => {
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={() => handleMouseLeave(index)}
                 >
-                  {showList && (
-                    <div>
-                      <button>Edit</button>
-                      <button>Delete</button>
-                    </div>
-                  )}
                   {/*hovered song */}
                   {isHovered[index] ? (
-                    <div className="w-[74.8%] absolute  h-20 border-b flex items-center px-6 opacity-90 bg-[#4d4e4c]">
+                    <div className="md:w-[75.7%] w-[80%] absolute  h-20 border-b flex items-center px-6 opacity-90 bg-[#4d4e4c]">
                       <div className="flex w-full justify-between">
                         <button onClick={() => onSelected(song.file)}>
                           <CiPlay1 className="text-xl" />
                         </button>
                         <button
                           onClick={() => {
-                            showHandleUpdate(selected._id);
+                            showHandleUpdate();
                           }}
                         >
                           <HiOutlineDotsHorizontal className="text-xl" />
                         </button>
                       </div>
+                      {showList && (
+                        <div className="flex flex-col absolute top-0 mt-[79px] bg-[#3a3c42] rounded-md w-[10%] gap-6 p-5 border right-0">
+                          <button
+                            onClick={() => {
+                              handleEditSong();
+                              onSelected(song);
+                            }}
+                            className="border rounded-md px-3 h-11"
+                          >
+                            <div className="flex gap-1 items-center">
+                              <FiEdit className="text-green-600" />
+                              Edit
+                            </div>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteSong(song._id)}
+                            className="border rounded-md px-3 h-11"
+                          >
+                            <div className="flex gap-1 items-center">
+                              <MdDelete className="text-red-600 text-2xl" />
+                              Delete
+                            </div>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   ) : null}
                   <span className="flex items-center">{index + 1}. </span>
                   <EachSong>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center w-[57%]  overflow-hidden h-full">
                       <img
                         src={song.Artwork ? song.Artwork : "/cov.webp"}
                         className="w-10 rounded-md h-10"
                       />
                       <h1>{song.Title}</h1>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center overflow-x-hidden">
                       <h1>{song.Artist}</h1>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center overflow-x-hidden">
                       <h1>{song.Genres}</h1>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center overflow-x-hidden">
                       <h1>{song.Album}</h1>
                     </div>
-                    <div className="flex items-center">
+                    <div className="items-center hidden md:block overflow-x-hidden">
                       <h1>{song.Duration}</h1>
                     </div>
                   </EachSong>
@@ -116,7 +145,7 @@ const Songs = ({ songs, onSelected }) => {
             </div>
           ))}
         </div>
-      </Song>
+      </div>
     </div>
   );
 };

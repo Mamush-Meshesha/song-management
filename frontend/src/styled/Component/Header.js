@@ -5,7 +5,6 @@ const Headers = styled.div`
   background-color: #3a3c42;
   position: fixed;
   z-index: 40;
-  position: fixed;
   border-radius: 6px;
   margin: 15px;
   top: 0;

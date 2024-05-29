@@ -6,12 +6,17 @@ const Song = styled.div`
 const Head = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
   color: white;
   text-transform: Capitalized;
   padding: 20px 0;
   font-size: 20px;
-  padding: 70px 50px 10px;
+
+  @media  (max-width: 640px){
+    
+  }
+
+  @me
+  
 `;
 const Placed = styled.div`
   height: 5rem; 
