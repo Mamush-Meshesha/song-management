@@ -58,8 +58,8 @@ const Addsong = ({close}) => {
 
   return (
     <div className="overflow-hidden">
-      <div className="w-[100vw] h-[100vh] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
-        <div className="w-[600px] h-[600px] p-10 bg-[#3a3c42] relative rounded-lg ">
+      <div className="w-[100vw] h-[100vh] z-[100] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
+        <div className="w-[600px] h-[600px] p-10  bg-[#3a3c42] relative rounded-lg ">
           <div className="flex justify-center py-10    text-white text-3xl">
             <h1>Would you like to add a song?</h1>
           </div>

@@ -61,7 +61,7 @@ const GenresDetail = () => {
 
   return (
     <Container>
-      <div className="fixed z-40 top-0 right-0 w-[80%]">
+      <div className="fixed z-30 top-0 right-0 w-[80%]">
         <Players>
           <dotlottie-player
             src="https://lottie.host/ca99de6d-26dd-411e-8def-8c940864c7f3/UaxD9Neqpo.json"

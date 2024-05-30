@@ -35,8 +35,36 @@ const Inner = styled.div`
  justify-content: space-between;    
 `
 const EachSong = styled.span`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 100%
-`
+  width: 100%;
+
+  @media (min-width: 390px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 884px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (min-width: 1594) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+`;
 export {Song, Head, Placed, Inner, EachSong}
