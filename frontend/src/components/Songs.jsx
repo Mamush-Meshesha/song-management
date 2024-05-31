@@ -56,7 +56,7 @@ const Songs = ({ songs, onSelected }) => {
     ).isRequired,
   };
   return (
-    <div className="">
+    <div className="z-30">
       <div>
         <Head>
           <h1># Title</h1>

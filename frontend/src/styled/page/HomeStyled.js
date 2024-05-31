@@ -45,8 +45,40 @@ const Players = styled.div`
     #537075,
     #2f4245
   );
-  height: 250px;
+
   
+ @media (min-width: 640px) {
+    height: 150px;
+  }
+
+  @media (min-width: 768px) {
+    height: 150px;
+  }
+
+  @media (min-width: 884px) {
+    height: 180px;
+    
+  }
+
+  @media (min-width: 1024px) {
+    height: 180px;
+    
+  }
+
+  @media (min-width: 1200px) {
+    height: 200px;
+   
+  }
+
+  @media (min-width: 1280px) {
+    height: 250px;
+    
+  }
+
+  @media (min-width: 1536px) {
+    height: 250px;
+    
+  }
 }
 
 // @media (min-width: 640px) {

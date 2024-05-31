@@ -14,10 +14,59 @@ const Pad = styled.div`
   padding: 80px 0 40px 0;
 `;
 const Placed = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin: 0 10%;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 884px) {
+    width: 500px;
+    hieght: 500px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 600px;
+    hieght: 600px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 600px;
+    @media (min-width: 768px) {
+      padding: 10px;
+      width: 300px;
+      hieght: 450px;
+    }
+
+    @media (min-width: 884px) {
+      width: 500px;
+      hieght: 500px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 600px;
+      hieght: 600px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 600px;
+      hieght: 600px;
+    }
+
+    @media (min-width: 1280px) {
+      width: 600px;
+      hieght: 600px;
+    }
+
+    @media (min-width: 1536px) {
+      width: 600px;
+      hieght: 600px;
+    }
+    width: 600px;
+    hieght: 600px;
+  }
 `;
 
 const Box = styled.button`

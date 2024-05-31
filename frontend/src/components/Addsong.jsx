@@ -2,6 +2,7 @@ import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadSong, uploadSongToCloud } from "../slice/songSlice";
 import { HiOutlineX } from "react-icons/hi";
+import { Add, Grid, Pad } from "../styled/Component/Add";
 
 const Addsong = ({close}) => {
   const [audios, setAudios] = useState(null);
@@ -54,19 +55,21 @@ const Addsong = ({close}) => {
 
     dispatch(uploadSongToCloud(songDetails));
   };
-
-
+  // className = "grid grid-cols-2 gap-6";
+// className = "w-[600px] h-[600px] p-10  bg-[#3a3c42] relative rounded-lg ";
+// className =
+//   "w-[100vw] h-[100vh] z-[100] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ";
   return (
     <div className="overflow-hidden">
-      <div className="w-[100vw] h-[100vh] z-[100] absolute bg-[#000] bg-opacity-80 top-0 left-0 flex justify-center items-center  ">
-        <div className="w-[600px] h-[600px] p-10  bg-[#3a3c42] relative rounded-lg ">
-          <div className="flex justify-center py-10    text-white text-3xl">
-            <h1>Would you like to add a song?</h1>
+      <Add >
+        <Pad>
+          <div className="flex justify-center pt-16    text-white text-3xl">
+            <h1 className="md:text-2xl text-xl ">Would you like to add a song?</h1>
           </div>
           <button onClick={close}>
             <HiOutlineX className="absolute top-0 right-0 m-5 text-3xl text-white border p-1 rounded-sm" />
           </button>
-          <div className="grid grid-cols-2 gap-6">
+          <Grid>
             <div>
               <input
                 value={title}
@@ -103,8 +106,8 @@ const Addsong = ({close}) => {
                 className="h-11 pl-3 outline-none rounded-md"
               />
             </div>
-          </div>
-          <div className="py-4 w-full justify-center flex">
+          </Grid>
+          <div className="py-4 px-5">
             <input
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
@@ -158,14 +161,14 @@ const Addsong = ({close}) => {
               </button>
             </div>
           </div>
-        </div>
+        </Pad>
         {isLoading && (
           <div className="absolute top-0 right-0">
             <progress value={uploadProgress} max="100" />
             <span>{uploadProgress}</span>
           </div>
         )}
-      </div>
+      </Add>
     </div>
   );
 };

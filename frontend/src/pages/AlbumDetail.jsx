@@ -104,7 +104,7 @@ const AlbumDetail = () => {
                     <span className="flex gap-2 items-center">
                       {index + 1}.
                     </span>
-                    <div>
+                    <EachSong>
                       <div className="flex gap-2 items-center">
                         <h1 className="text-white">{song.Title}</h1>
                       </div>
@@ -120,7 +120,7 @@ const AlbumDetail = () => {
                       <div className="flex gap-2 items-center">
                         <h1>{song.Duration}</h1>
                       </div>
-                    </div>
+                    </EachSong>
                   </span>
                 </div>
               </div>
