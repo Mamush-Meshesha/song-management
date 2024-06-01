@@ -39,7 +39,7 @@ function Home() {
             </div>
           </Players>
         </div>
-        <div className="px-10 mt-[250px]">
+        <div className="px-10 mt-[190px] md:mt-[290px]">
           <Songs songs={songs} onSelected={handleSongSelect} />
         </div>
       </Container>

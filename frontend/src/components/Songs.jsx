@@ -120,23 +120,27 @@ const Songs = ({ songs, onSelected }) => {
                   ) : null}
                   <span className="flex items-center">{index + 1}. </span>
                   <EachSong>
-                    <div className="flex gap-2 items-center w-[57%]  overflow-hidden h-full">
+                    <div className="flex gap-2 items-center w-[77%]  overflow-hidden h-full">
                       <img
                         src={song.Artwork ? song.Artwork : "/cov.webp"}
                         className="w-10 rounded-md h-10"
                       />
                       <h1>{song.Title}</h1>
                     </div>
-                    <div className="flex items-center overflow-x-hidden">
-                      <h1>{song.Artist}</h1>
+                    <div className="flex items-center w-[77%] overflow-x-hidden">
+                      <h1 className="text-ellipsis whitespace-nowrap overflow-hidden">
+                        {song.Artist}
+                      </h1>
                     </div>
-                    <div className="flex items-center overflow-x-hidden">
-                      <h1>{song.Genres}</h1>
+                    <div className="flex items-center w-[77%] overflow-x-hidden">
+                      <h1 className="text-ellipsis whitespace-nowrap overflow-hidden">
+                        {song.Genres}
+                      </h1>
                     </div>
-                    <div className="flex items-center overflow-x-hidden">
-                      <h1>{song.Album}</h1>
+                    <div className="flex items-center w-[77%] overflow-x-hidden">
+                      <h1 className="text-ellipsis whitespace-nowrap overflow-hidden" >{song.Album}</h1>
                     </div>
-                    <div className="items-center hidden md:block overflow-x-hidden">
+                    <div className="items-center  flex overflow-x-hidden">
                       <h1>{song.Duration}</h1>
                     </div>
                   </EachSong>

@@ -5,18 +5,56 @@ const Song = styled.div`
 `
 const Head = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   color: white;
   text-transform: Capitalized;
-  padding: 20px 0;
-  font-size: 20px;
 
-  @media  (max-width: 640px){
-    
+  @media (min-width: 360px) {
+    width: 100%;
+    display: grid;
+    padding: 10px 0;
+    font-size: 16px;
+
+    grid-template-columns: repeat(5, 1fr);
   }
 
-  @me
-  
+  @media (min-width: 640px) {
+    padding: 10px 0;
+    display: grid;
+    font-size: 16px;
+
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 0;
+    font-size: 16px;
+  }
+
+  @media (min-width: 884px) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 20px 0;
+    font-size: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 20px 0;
+    font-size: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 20px 0;
+    font-size: 20px;
+  }
+  @media (min-width: 1594) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 20px 0;
+    font-size: 20px;
+  }
+
+  @me;
 `;
 const Placed = styled.div`
   height: 5rem; 
@@ -37,34 +75,41 @@ const Inner = styled.div`
 const EachSong = styled.span`
   width: 100%;
 
-  @media (min-width: 390px) {
+  @media (min-width: 360px) {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    font-size: 12px;
+    grid-template-columns: repeat(5, 1fr);
   }
 
   @media (min-width: 640px) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 12px;
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 12px;
   }
 
   @media (min-width: 884px) {
     grid-template-columns: repeat(5, 1fr);
+    font-size: 18px;
   }
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(5, 1fr);
+    font-size: 18px;
   }
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(5, 1fr);
+    font-size: 18px;
   }
   @media (min-width: 1594) {
     grid-template-columns: repeat(5, 1fr);
+    font-size: 18px;
   }
 `;
 export {Song, Head, Placed, Inner, EachSong}

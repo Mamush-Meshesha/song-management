@@ -119,29 +119,29 @@ const Player = ({ songUrl, song }) => {
         <audio ref={audioPlayer} src={songUrl} preload="metadata"></audio>
       </div>
 
-      <button onClick={previousSong}>
+      <button className="md:text-2xl text-xs " onClick={previousSong}>
         <FaBackward className="text-[#12be24] text-xl" />
       </button>
-      <button className="text-2xl" onClick={backThirthy}>
+      <button className="md:text-2xl text-xs " onClick={backThirthy}>
         <FaStepBackward className="text-[#12be24]" />
       </button>
-      <button onClick={togglePlay} className="text-3xl">
+      <button onClick={togglePlay} >
         {isPlaying ? (
           <IoPauseCircleOutline className="text-[#12be24]" />
         ) : (
           <MdOutlinePlayCircle className="text-[#12be24]" />
         )}
       </button>
-      <button className="text-2xl" onClick={forwardThirthy}>
+      <button className="md:text-2xl text-xs " onClick={forwardThirthy}>
         <FaForwardStep className="text-[#12be24]" />
       </button>
-      <button onClick={nextSong}>
+      <button className="md:text-2xl text-xs " onClick={nextSong}>
         <FaForward className="text-[#12be24] text-xl" />
       </button>
 
       {/* current */}
       <div>{calculateTime(currentTime)}</div>
-      <div className="w-[70%]">
+      <div className="md:w-[70%] w-[120px] ">
         <input
           ref={progressBar}
           type="range"
@@ -151,13 +151,14 @@ const Player = ({ songUrl, song }) => {
         />
       </div>
       <div>{calculateTime(duration)}</div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center w-[10%] md:w-[70%] ">
         <input
           type="range"
           min="0"
           max="100"
           step="1"
           value={volume}
+          className="w-[60px]"
           onChange={handleVolumeChange}
         />
         <span>{volume}%</span>
