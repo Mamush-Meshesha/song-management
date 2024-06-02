@@ -15,69 +15,50 @@ const Pad = styled.div`
 `;
 const Placed = styled.div`
   gap: 12px;
-  margin: 0 10%;
+  margin: 0 5%;
+  display: grid;
+  gap: 20px;
+  border-radius: 6px;
+  color: white;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+
+  @media (max-width: 360px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media (min-width: 884px) {
-    width: 500px;
-    hieght: 500px;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media (min-width: 1024px) {
-    width: 600px;
-    hieght: 600px;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   @media (min-width: 1200px) {
-    width: 600px;
-    @media (min-width: 768px) {
-      padding: 10px;
-      width: 300px;
-      hieght: 450px;
-    }
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-    @media (min-width: 884px) {
-      width: 500px;
-      hieght: 500px;
-    }
-
-    @media (min-width: 1024px) {
-      width: 600px;
-      hieght: 600px;
-    }
-
-    @media (min-width: 1200px) {
-      width: 600px;
-      hieght: 600px;
-    }
-
-    @media (min-width: 1280px) {
-      width: 600px;
-      hieght: 600px;
-    }
-
-    @media (min-width: 1536px) {
-      width: 600px;
-      hieght: 600px;
-    }
-    width: 600px;
-    hieght: 600px;
+  @media (min-width: 1594px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
 const Box = styled.button`
-  height: 200px;
-  border-radius: 6px;
-  background-color: black;
-  color: white;
-  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 200px;
+border-radius: 6px;
 `;
+
 
 export { AlbumStyled, Pad, Placed, Box };

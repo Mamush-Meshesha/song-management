@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { IoMenuOutline } from "react-icons/io5";
 import Addsong from "./Addsong";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Headers, Order, AddSongButton } from "../styled/Component/Header";
 
 const Header = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef(null)
 
   const toggleShow = () => {
     setShowAdd(!showAdd);
@@ -20,20 +20,20 @@ const Header = () => {
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setIsMenuOpen(false);
+      setIsMenuOpen(false)
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  })
 
   return (
-    <div>
-      <div className="md:w-[18%] z-40 bg-[#3a3c42] fixed rounded-md top-0">
+    <div className="">
+      <div className="md:w-[18%] z-40 bg-[#3a3c42] fixed   rounded-md top-0">
         {/* Icon for small devices */}
         <div className="md:hidden absolute flex justify-end p-4">
           <button onClick={toggleMenu} className="text-white">
@@ -127,15 +127,32 @@ const Header = () => {
                 <h1 className="hidden sm:block">Genres</h1>
               </NavLink>
             </motion.button>
+            <motion.button
+              whileTap={{ margin: "2px", scale: 0.9 }}
+              className="sm:flex text-xl sm:gap-3 border py-2 border-[#020008] px-3 rounded-md"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-7 h-7"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <AddSongButton onClick={toggleShow} className="hidden sm:block">
+                Add Song
+              </AddSongButton>
+            </motion.button>
           </Order>
         </div>
 
         {/* Menu for small devices */}
         {isMenuOpen && (
-          <div
-            ref={menuRef}
-            className="md:hidden z-50 bg-[#3a3c42] text-white transition-all duration-300 ease-in-out"
-          >
+          <div ref={menuRef} className="md:hidden text-white">
             <Order>
               <motion.button whileTap={{ margin: "2px", scale: 0.9 }}>
                 <NavLink
@@ -220,30 +237,29 @@ const Header = () => {
                   <h1>Genres</h1>
                 </NavLink>
               </motion.button>
+              <motion.button
+                whileTap={{ margin: "2px", scale: 0.9 }}
+                className="flex text-xl gap-3 border py-2 border-[#020008] px-3 rounded-md"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-7 h-7"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <AddSongButton onClick={toggleShow}>Add Song</AddSongButton>
+              </motion.button>
             </Order>
           </div>
         )}
+        <div>{showAdd && <Addsong close={toggleShow} />}</div>
       </div>
-      <AddSongButton
-        onClick={toggleShow}
-        className="absolute bottom-20 z-50 left-[80%] sm:left-[90%]"
-      >
-        <button className="text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-10 h-10"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5H12.75v6.75a.75.75 0 0 1-1.5 0V12.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </AddSongButton>
-      {showAdd && <Addsong toggleShow={toggleShow} />}
     </div>
   );
 };
