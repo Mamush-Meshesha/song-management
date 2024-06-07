@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv")
 const cors = require("cors");
 const mongoose = require("mongoose");
 const seeder = require("./seeder.js");
@@ -7,10 +8,9 @@ const app = express();
 const upload = require("./multer.js");
 const cloudinary = require("./cloudinary.js");
 const fs = require("fs");
-const MONGO_URL =
-  "mongodb+srv://mam1620she:Mamush12192123@cluster0.mopt8jl.mongodb.net/song_management";
+const MONGO_URL = process.env.MONGO_URL
 
-const PORT = 5000;
+const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -222,7 +222,7 @@ app.get("/songs", async (req, res) => {
 
     res.json(songs);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 

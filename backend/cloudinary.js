@@ -1,8 +1,10 @@
 const cloudinary = require("cloudinary");
+const dotenv = require("dotenv")
+dotenv.config()
 
-const CLOUD_NAME = "dmjtytstd";
-const API_KEY = "216288979336725";
-const API_SECRET = "MJufkalWaCALwEvLyXT7cd-48hY";
+const CLOUD_NAME = process.env.CLOUD_NAME
+const API_KEY = process.env.API_KEY
+const API_SECRET = process.env.API_SECRET
 
 
 cloudinary.config({
