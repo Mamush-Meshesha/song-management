@@ -27,7 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/album/:albumName" element={<AlbumDetail />} />
         <Route path="/artist" element={<Artists />} />
         <Route path="/edit" element={<Editsong />} />
-
         <Route path="/artist/:artistName" element={<ArtistDetail />} />
       </Routes>
     </BrowserRouter>
