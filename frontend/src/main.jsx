@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 // import createSagaMiddleware from "redux-saga";
 // import { configureStore } from "@reduxjs/toolkit";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import Home from "./pages/Home.jsx";
