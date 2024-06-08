@@ -35,7 +35,7 @@ function* uploadSong(action) {
     console.log("Uploading file:", action.payload);
     const response = yield call(
       axios.post,
-      "http://localhost:3200/upload",
+      "https://backend-backend-t16i.onrender.com/upload",
       action.payload,
       {
         headers: {
@@ -54,7 +54,7 @@ function* uploadSong(action) {
 
 function* fetchSong() {
   try {
-    const song = yield call(axios.get, "http://localhost:3200/songs");
+    const song = yield call(axios.get, "https://backend-backend-t16i.onrender.com/songs");
     yield put(fetchSongSuccess(song.data));
   } catch (error) {
     yield put(fetchSongFailure(error.message));
@@ -62,7 +62,7 @@ function* fetchSong() {
 }
 function* fetchSongsByAlbum(action) {
   try {
-    const res = yield call(axios.get, "http://localhost:3200/album", {
+    const res = yield call(axios.get, "https://backend-backend-t16i.onrender.com/album", {
       params: { album: action.payload },
     });
     yield put(fetchSongByAlbumSuccess(res.data));
@@ -74,7 +74,7 @@ function* fetchSongsByAlbum(action) {
 
 function* fetchSongByArtistSaga(action) {
   try {
-    const res = yield call(axios.get, "http://localhost:3200/artist", {
+    const res = yield call(axios.get, "https://backend-backend-t16i.onrender.com/artist", {
       params: { artist: action.payload },
     });
     yield put(fetchSongByArtistSuccess(res.data));
@@ -85,7 +85,7 @@ function* fetchSongByArtistSaga(action) {
 
 function* fetchSongByGenreSaga(action) {
   try {
-    const res = yield call(axios.get, "http://localhost:3200/genres", {
+    const res = yield call(axios.get, "https://backend-backend-t16i.onrender.com/genres", {
       params: { genres: action.payload },
     });
     yield put(fetchSongByGenresSuccess(res.data));
@@ -98,7 +98,7 @@ function* uploadSongTo(action) {
   try {
     const res = yield call(
       axios.post,
-      "http://localhost:3200/songs",
+      "https://backend-backend-t16i.onrender.com/songs",
       action.payload,
       {
         headers: {
@@ -116,7 +116,7 @@ function* deleteSongSage(action) {
   try {
     const res = yield call(
       axios.delete,
-      `http://localhost:3200/delete/${action.payload}`
+      `https://backend-backend-t16i.onrender.com/delete/${action.payload}`
     );
     yield put(removeSongSuccess(action.payload));
     console.log(res.data);
@@ -130,7 +130,7 @@ function* updateSongSage(action) {
   try {
     const res = yield call(
       axios.put,
-      `http://localhost:3200/update/${action.payload.id}`,
+      `https://backend-backend-t16i.onrender.com/update/${action.payload.id}`,
       action.payload
     );
     yield put(updateSongSuccess(res.data));
